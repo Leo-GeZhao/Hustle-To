@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { signUp } from '../../utilities/services/users'
+import { useNavigate } from 'react-router-dom';
 
 
 const defaultState = {
@@ -10,10 +11,12 @@ const defaultState = {
     error: ''
 }
 
-export default function SignUpForm(props){
+export default function SignUpForm({setUser}){
     const [formData, setFormData] = useState(defaultState)
 
     const { name, email, password, confirm, error } = formData;
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) =>{
         // when we submit we basically just grab whatever we have in
@@ -25,8 +28,8 @@ export default function SignUpForm(props){
             const data = {name, password, email}
 
             const user = await signUp(data)
-            console.log(user) // log the response from Express server AFTER all the server code runs
-                              // and we wait for the code to finish running
+            setUser(user);
+            navigate('/');
         }catch (err) {
             setFormData({
                 ...formData,
