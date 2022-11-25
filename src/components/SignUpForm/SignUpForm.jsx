@@ -35,13 +35,6 @@ export default function SignUpForm(props){
         }
     }
 
-
-    // const handleChange = (e) => {
-    //     const newFormData = { ...formData, [e.target.name]: e.target.value }
-    //     window.alert( JSON.stringify(newFormData ) )
-    //     setFormData(newFormData)
-    // }
-
     function handleChange(evt) {
         // Replace with new object and use a computed property
         // to update the correct property
