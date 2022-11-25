@@ -5,7 +5,8 @@ import { Routes, Route } from 'react-router-dom';
 import NavBar from '../../components/NavBar/NavBar';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import SignUpForm from '../../components/SignUpForm/SignUpForm';
-import ProductPage from './ProductPage/ProductPage';
+import ProductPage from '../ProductPage/ProductPage';
+import AdminPage from '../AdminPage/AdminPage';
 
 //helper
 import { getUser } from '../../utilities/services/users';
@@ -25,6 +26,8 @@ export default function App() {
               <Route path="/login" element={<LoginForm setUser={setUser}/>} />
               <Route path="/createaccount" element={<SignUpForm setUser={setUser}/>} />
               <Route path="/" element={<ProductPage/>} />
+              <Route path="/admin" element={<AdminPage/>} />
+
               
             </Routes>
     </main>
