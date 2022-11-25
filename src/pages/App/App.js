@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 
 //components
 import NavBar from '../../components/NavBar/NavBar';
+import Footer from '../../components/Footer/Footer';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import SignUpForm from '../../components/SignUpForm/SignUpForm';
 import ProductPage from '../ProductPage/ProductPage';
@@ -27,9 +28,8 @@ export default function App() {
               <Route path="/createaccount" element={<SignUpForm setUser={setUser}/>} />
               <Route path="/" element={<ProductPage/>} />
               <Route path="/admin" element={<AdminPage/>} />
-
-              
             </Routes>
+            <Footer user={user} setUser={setUser}/>
     </main>
   );
 }

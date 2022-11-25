@@ -9,7 +9,7 @@ export default function NavBar({user, setUser}) {
   }
   return (
     
-    <nav className="navbar navbar-expand-lg bg-light" >
+    <nav className="navbar navbar-expand-lg" >
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">HustleTo</Link>
         <div className='justify-content-end'>

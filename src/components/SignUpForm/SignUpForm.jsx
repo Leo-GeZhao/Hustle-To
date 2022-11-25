@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { signUp } from '../../utilities/services/users'
 import { useNavigate } from 'react-router-dom';
 
+import './SignUpForm.css'
+
 
 const defaultState = {
     name: '',
@@ -53,7 +55,8 @@ export default function SignUpForm({setUser}){
 
     return <div className='SignUpForm'>
             <div className="form-container">
-                <form onSubmit={handleSubmit} autoComplete="off">
+                <h2>Sign Up</h2>
+                <form className="form" onSubmit={handleSubmit} autoComplete="off">
                     <label htmlFor="name">Name</label>
                     <input type="text" name="name" id="name" value={name} onChange={handleChange} required/>
 
