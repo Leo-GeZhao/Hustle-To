@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { signUp } from '../../utilities/services/users'
+import { signUp } from '../../../utilities/services/users'
 import { useNavigate } from 'react-router-dom';
 
 import './SignUpForm.css'

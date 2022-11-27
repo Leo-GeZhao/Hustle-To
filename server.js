@@ -9,6 +9,7 @@ require('dotenv').config();
 require('./config/database');
 
 const userRouter = require('./routes/api/users')
+const sneakerRouter = require('./routes/api/sneakers')
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use(require('./config/checkToken'))
 
 // API routes here
 app.use('/api/users', userRouter)
+app.use('/api/sneakers', sneakerRouter)
 
 // "Catch all" route
 app.get('/*', function(req, res) {

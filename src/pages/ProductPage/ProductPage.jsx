@@ -1,5 +1,15 @@
+import Card from "../../components/Product/Card/Card"
+import './ProductPage.css'
+export default function ProductPage({sneakers,setSneakers}){
 
-export default function ProductPage(){
-  
-    return <div>Product Page</div>
+    return (
+        <>
+            <div>Product Page</div>
+                <div className="row">
+                    <div class="col">
+                        {sneakers.map((s)=> <Card sneaker={s}/>)}
+                    </div>
+            </div>
+        </>
+    )
 }

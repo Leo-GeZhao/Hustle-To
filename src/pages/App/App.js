@@ -1,16 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 //components
 import NavBar from '../../components/NavBar/NavBar';
 import Footer from '../../components/Footer/Footer';
-import LoginForm from '../../components/LoginForm/LoginForm';
-import SignUpForm from '../../components/SignUpForm/SignUpForm';
+import LoginForm from '../../components/Account/LoginForm/LoginForm';
+import SignUpForm from '../../components/Account/SignUpForm/SignUpForm';
 import ProductPage from '../ProductPage/ProductPage';
 import AdminPage from '../AdminPage/AdminPage';
 
 //helper
 import { getUser } from '../../utilities/services/users';
+import * as adminAPI from '../../utilities/api/sneakers'
 
 
 import './App.css';
@@ -18,6 +19,17 @@ import './App.css';
 
 export default function App() {
   const [user, setUser] = useState(getUser());
+  const [sneakers, SetSneakers] = useState([])
+
+  useEffect(function(){
+    async function getSneakers(){
+      const sneakers = await adminAPI.getSneaker();
+      SetSneakers(sneakers)
+    }
+    getSneakers();
+  },[]);
+
+
 
   return (
     <main className="App">
@@ -26,8 +38,8 @@ export default function App() {
               {/* Route components in here */}
               <Route path="/login" element={<LoginForm setUser={setUser}/>} />
               <Route path="/createaccount" element={<SignUpForm setUser={setUser}/>} />
-              <Route path="/" element={<ProductPage/>} />
-              <Route path="/admin" element={<AdminPage/>} />
+              <Route path="/" element={<ProductPage sneakers={sneakers} SetSneakers={SetSneakers} />} />
+              <Route path="/admin" element={<AdminPage user={user} sneakers={sneakers}/>} />
             </Routes>
             <Footer user={user} setUser={setUser}/>
     </main>
