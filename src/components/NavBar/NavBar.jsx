@@ -16,10 +16,12 @@ export default function NavBar({user, setUser}) {
           {
             user ? 
               <>
-                <span className="name">Hello, {user.name}</span>
                 {
                   user.email===process.env.REACT_APP_ADMIN ?
-                    <Link to="/admin">Admin</Link>
+                    <>
+                    <Link to="/admin">Admin Portal</Link>
+                    <Link to="admin/addinventory">Add Inventory</Link>
+                    </>
                     :
                     <></>
                 }
