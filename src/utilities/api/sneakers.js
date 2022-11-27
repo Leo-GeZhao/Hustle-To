@@ -5,6 +5,10 @@ export async function insertSneaker(adminData){
     return sendRequest(BASE_URL,"POST",adminData,"Invalid Input")
 }
 
-export function getSneaker() {
+export function getSneakers() {
     return sendRequest(`${BASE_URL}/sneakers`);
   }
+
+export function getSneaker(sneakerName){
+    return sendRequest(`${BASE_URL}/sneakers/${sneakerName}`)
+}

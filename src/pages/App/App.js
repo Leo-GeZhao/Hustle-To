@@ -21,16 +21,15 @@ import './App.css';
 
 export default function App() {
   const [user, setUser] = useState(getUser());
-  const [sneakers, SetSneakers] = useState([])
+  const [sneakers, setSneakers] = useState([])
 
   useEffect(function(){
     async function getSneakers(){
-      const sneakers = await adminAPI.getSneaker();
-      SetSneakers(sneakers)
+      const sneakers = await adminAPI.getSneakers();
+      setSneakers(sneakers)
     }
     getSneakers();
   },[]);
-
 
 
   return (
@@ -40,9 +39,9 @@ export default function App() {
               {/* Route components in here */}
               <Route path="/login" element={<LoginForm setUser={setUser}/>} />
               <Route path="/createaccount" element={<SignUpForm setUser={setUser}/>} />
-              <Route path="/" element={<ProductPage sneakers={sneakers} SetSneakers={SetSneakers} />} />
+              <Route path="/" element={<ProductPage sneakers={sneakers} setSneakers={setSneakers} />} />
               <Route path="/admin/product" element={<AdminPage user={user} sneakers={sneakers}/>} />
-              <Route path="/admin/product/:sneakerName" element={<AdminProductDetailPage/>} />
+              <Route path="/admin/product/:sneakerName" element={<AdminProductDetailPage setSneakers={setSneakers} sneaker={sneakers}/>} />
               
               <Route path="/admin/addinventory" element={<AddInventoryPage user={user}/>} />
             </Routes>
