@@ -4,6 +4,6 @@ const router = express.Router();
 const sneakersCtrl = require('../../controllers/api/sneakers');
 
 router.post('/', sneakersCtrl.create);
-router.get('/allSneakers', sneakersCtrl.index)
+router.get('/sneakers', sneakersCtrl.index)
 
 module.exports = router;

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { insertSneaker } from "../../utilities/api/sneakers";
 
+import './AddAdmin.css'
+
 const defaultState = {
     name: '',
     price: '',

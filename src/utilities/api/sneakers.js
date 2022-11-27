@@ -6,5 +6,5 @@ export async function insertSneaker(adminData){
 }
 
 export function getSneaker() {
-    return sendRequest(`${BASE_URL}/allSneakers`);
+    return sendRequest(`${BASE_URL}/sneakers`);
   }
