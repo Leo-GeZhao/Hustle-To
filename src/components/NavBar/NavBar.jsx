@@ -19,8 +19,8 @@ export default function NavBar({user, setUser}) {
                 {
                   user.email===process.env.REACT_APP_ADMIN ?
                     <>
-                    <Link to="/admin">Admin Portal</Link>
-                    <Link to="admin/addinventory">Add Inventory</Link>
+                    <Link to="/admin/product">Admin Portal</Link>
+                    <Link to="/admin/addinventory">Add Inventory</Link>
                     </>
                     :
                     <></>
