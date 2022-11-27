@@ -9,6 +9,7 @@ import SignUpForm from '../../components/Account/SignUpForm/SignUpForm';
 import ProductPage from '../ProductPage/ProductPage';
 import AdminPage from '../AdminPage/AdminPage';
 import AddInventoryPage from '../AdminPage/AddInventoryPage';
+import AdminProductDetailPage from '../AdminPage/AdminProductDetailPage';
 
 //helper
 import { getUser } from '../../utilities/services/users';
@@ -41,7 +42,7 @@ export default function App() {
               <Route path="/createaccount" element={<SignUpForm setUser={setUser}/>} />
               <Route path="/" element={<ProductPage sneakers={sneakers} SetSneakers={SetSneakers} />} />
               <Route path="/admin/product" element={<AdminPage user={user} sneakers={sneakers}/>} />
-              {/* <Route path="/admin" element={<AdminPage user={user} sneakers={sneakers}/>} /> */}
+              <Route path="/admin/product/:sneakerName" element={<AdminProductDetailPage/>} />
               
               <Route path="/admin/addinventory" element={<AddInventoryPage user={user}/>} />
             </Routes>
