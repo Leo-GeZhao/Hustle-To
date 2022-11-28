@@ -85,7 +85,7 @@ export default function AdminProductDetailPage(){
                 <div>{sneaker.price}</div>
                 <div>{sneaker.size}</div>
                 <div>{sneaker.description}</div>
-                <button onClick={handleDelete}>Delete</button>
+                <button onClick={handleDelete} className="btn btn-danger">Delete</button>
             </div>
             <div>
             <h2>Edit Product</h2>
@@ -100,7 +100,7 @@ export default function AdminProductDetailPage(){
                     <label htmlFor="description">Description</label>
                     <input type="text" name="description" id="description" value={description} onChange={handleChange} required />
 
-                    <button type="submit">Edit Product</button>
+                    <button type="submit" className="btn btn-success">Edit Product</button>
                 </form>
             </div>
         </div>

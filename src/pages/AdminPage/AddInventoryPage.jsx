@@ -65,7 +65,7 @@ export default function AddInventoryPage() {
                     <label htmlFor="description">Description</label>
                     <input type="text" name="description" id="description" value={description} onChange={handleChange} required />
 
-                    <button type="submit">Input Product</button>
+                    <button type="submit" className="btn btn-success">Input Product</button>
                 </form>
             </div>
         </div>
