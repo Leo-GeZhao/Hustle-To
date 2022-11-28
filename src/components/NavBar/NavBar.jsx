@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import * as userService from '../../utilities/services/users'
 
+import './NavBar.css'
+
 export default function NavBar({user, setUser}) {
 
   function handleLogOut(){
@@ -19,7 +21,7 @@ export default function NavBar({user, setUser}) {
                 {
                   user.email===process.env.REACT_APP_ADMIN ?
                     <>
-                    <Link to="/admin/product">Admin Portal</Link>
+                    <Link to="/admin/product">Inventory</Link>
                     <Link to="/admin/addinventory">Add Inventory</Link>
                     </>
                     :
