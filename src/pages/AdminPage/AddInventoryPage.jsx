@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { insertSneaker } from "../../utilities/api/sneakers";
+
 
 import './AddAdmin.css'
 
@@ -15,6 +17,8 @@ export default function AddInventoryPage() {
 
     const { name, price, size, description } = formData;
 
+    const navigate = useNavigate();
+
     const handleSubmit = async (e) =>{
         // when we submit we basically just grab whatever we have in
         // the state.
@@ -24,8 +28,7 @@ export default function AddInventoryPage() {
             const data = {name, price, size, description}
 
             const sneaker = await insertSneaker(data)
-            // setUser(user);
-            // navigate('/');
+            navigate('/admin/product');
         }catch (err) {
             setFormData({
                 ...formData,

@@ -1,5 +1,6 @@
+import { getNextKeyDef } from "@testing-library/user-event/dist/keyboard/getNextKeyDef";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import * as adminAPI from '../../utilities/api/sneakers'
 export default function AdminProductDetailPage(){
@@ -7,6 +8,8 @@ export default function AdminProductDetailPage(){
     const [sneaker,setSneaker] = useState('')
     
     const {sneakerName} = useParams()
+    
+    const navigate = useNavigate();
     
 
     useEffect(function(){
@@ -18,6 +21,16 @@ export default function AdminProductDetailPage(){
         getSneaker(sneakerName);
       },[]);
     
+    async function handleSubmit(evt){
+        evt.preventDefault()
+        try {
+            await adminAPI.deleteSneaker(sneakerName);
+            setSneaker('')
+            // navigate('/admin/product'); this is not working
+        }catch(err){
+            console.log(err)
+        }
+    }
 
     return (
         <div className="card">
@@ -26,6 +39,7 @@ export default function AdminProductDetailPage(){
             <div>{sneaker.price}</div>
             <div>{sneaker.size}</div>
             <div>{sneaker.description}</div>
+            <button onClick={handleSubmit}>Delete</button>
         </div>
     )
 }

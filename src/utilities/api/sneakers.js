@@ -12,3 +12,7 @@ export function getSneakers() {
 export function getSneaker(sneakerName){
     return sendRequest(`${BASE_URL}/sneakers/${sneakerName}`)
 }
+
+export function deleteSneaker(sneakerName){
+    return sendRequest(`${BASE_URL}/sneakers/${sneakerName}`,"DELETE")
+}

@@ -28,9 +28,18 @@ async function show(req,res){
     }
 }
 
+async function deleteSneaker(req,res){
+    try {
+        await Sneaker.findOneAndDelete({'name':req.params.sneakerName})
+        res.json()
+    }catch{
+        res.status(400).json(err)
+    }
+}
 
 module.exports = {
     create,
     index,
     show,
+    delete:deleteSneaker,
 }
