@@ -37,9 +37,19 @@ async function deleteSneaker(req,res){
     }
 }
 
+async function edit(req,res){
+    try {
+        const updateSneaker = await Sneaker.updateOne({'name':req.params.sneakerName}, req.body)
+        res.json(updateSneaker)
+    }catch(err){
+        res.status(400).json(err);
+    }
+}
+
 module.exports = {
     create,
     index,
     show,
     delete:deleteSneaker,
+    edit,
 }

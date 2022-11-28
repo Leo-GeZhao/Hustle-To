@@ -4,7 +4,11 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import * as adminAPI from '../../utilities/api/sneakers'
 
-
+const defaultState = {
+    price: '',
+    size: '',
+    description: '',
+}
 
 export default function AdminProductDetailPage(){
 
@@ -14,8 +18,12 @@ export default function AdminProductDetailPage(){
     const {sneakerName} = useParams()
     
     const navigate = useNavigate();
-    
 
+    const [formData, setFormData] = useState(defaultState)
+
+    const { price, size, description } = formData;
+    
+    //Delete
     useEffect(function(){
         async function getSneaker(sneakerName){
           const sneaker = await adminAPI.getSneaker(sneakerName);
@@ -25,7 +33,7 @@ export default function AdminProductDetailPage(){
         getSneaker(sneakerName);
       },[]);
     
-    async function handleSubmit(evt){
+    async function handleDelete(evt){
         evt.preventDefault()
         try {
             await adminAPI.deleteSneaker(sneakerName);
@@ -36,6 +44,39 @@ export default function AdminProductDetailPage(){
         }
     }
 
+    //Edit
+    const handleEdit = async (e) =>{
+        // when we submit we basically just grab whatever we have in
+        // the state.
+        e.preventDefault();
+
+        try{
+            const data = { price, size, description}
+
+            const sneaker = await adminAPI.editSneaker(sneakerName,data)
+            console.log(sneaker)
+            setSneaker(...sneaker, sneaker[0])
+
+            navigate('/admin/product');
+        }catch (err) {
+            setFormData({
+                ...formData,
+                error: 'Input Failed - Try again!'
+            })
+        }
+    }
+
+    function handleChange(evt) {
+        // Replace with new object and use a computed property
+        // to update the correct property
+        const newFormData = {
+            ...formData, // use the existing formData
+            [evt.target.name]: evt.target.value, // override whatever key with the current fieldd's value
+            error: '' // clear any old errors as soon as the user interacts with the form
+        };
+        setFormData(newFormData);
+    }
+
     return (
         <div>
             <div className="card">
@@ -44,9 +85,23 @@ export default function AdminProductDetailPage(){
                 <div>{sneaker.price}</div>
                 <div>{sneaker.size}</div>
                 <div>{sneaker.description}</div>
-                <button onClick={handleSubmit}>Delete</button>
+                <button onClick={handleDelete}>Delete</button>
             </div>
             <div>
+            <h2>Edit Product</h2>
+            <form className="form" onSubmit={handleEdit} autoComplete="off">
+
+                    <label htmlFor="price">Price</label>
+                    <input type="number" name="price" id="price" value={price} onChange={handleChange} required />
+
+                    <label htmlFor="size">Size</label>
+                    <input type="number" name="size" id="size" value={size} onChange={handleChange} required />
+
+                    <label htmlFor="description">Description</label>
+                    <input type="text" name="description" id="description" value={description} onChange={handleChange} required />
+
+                    <button type="submit">Edit Product</button>
+                </form>
             </div>
         </div>
     )

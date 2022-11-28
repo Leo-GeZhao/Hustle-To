@@ -1,6 +1,6 @@
 import { useState, } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { insertSneaker } from "../../utilities/api/sneakers";
+import { useNavigate, Link,useParams } from "react-router-dom";
+import * as adminAPI from '../../utilities/api/sneakers'
 
 
 import './AddAdmin.css'
@@ -19,6 +19,7 @@ export default function AddInventoryPage() {
 
     const navigate = useNavigate();
 
+
     const handleSubmit = async (e) =>{
         // when we submit we basically just grab whatever we have in
         // the state.
@@ -27,7 +28,7 @@ export default function AddInventoryPage() {
         try{
             const data = {name, price, size, description}
 
-            const sneaker = await insertSneaker(data)
+            const sneaker = await adminAPI.createSneaker(data)
             navigate('/admin/product');
         }catch (err) {
             setFormData({
@@ -64,7 +65,7 @@ export default function AddInventoryPage() {
                     <label htmlFor="description">Description</label>
                     <input type="text" name="description" id="description" value={description} onChange={handleChange} required />
 
-                    <button type="submit">Input Inventory</button>
+                    <button type="submit">Input Product</button>
                 </form>
             </div>
         </div>
