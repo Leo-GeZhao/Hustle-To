@@ -68,5 +68,4 @@ export default function AddInventoryPage() {
                 </form>
             </div>
         </div>
-
 }

@@ -25,8 +25,8 @@ export default function App() {
 
   useEffect(function(){
     async function getSneakers(){
-      const sneakers = await adminAPI.getSneakers();
-      setSneakers(sneakers)
+      const allSneakers = await adminAPI.getSneakers();
+      setSneakers(...sneakers,allSneakers)
     }
     getSneakers();
   },[]);

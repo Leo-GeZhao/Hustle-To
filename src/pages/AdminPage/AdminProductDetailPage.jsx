@@ -3,7 +3,11 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import * as adminAPI from '../../utilities/api/sneakers'
+
+
+
 export default function AdminProductDetailPage(){
+
     
     const [sneaker,setSneaker] = useState('')
     
@@ -16,7 +20,7 @@ export default function AdminProductDetailPage(){
         async function getSneaker(sneakerName){
           const sneaker = await adminAPI.getSneaker(sneakerName);
           console.log(sneaker)
-          setSneaker(sneaker[0])
+          setSneaker(...sneaker, sneaker[0])
         }
         getSneaker(sneakerName);
       },[]);
@@ -25,7 +29,7 @@ export default function AdminProductDetailPage(){
         evt.preventDefault()
         try {
             await adminAPI.deleteSneaker(sneakerName);
-            setSneaker('')
+            setSneaker(...sneaker,'')
             // navigate('/admin/product'); this is not working
         }catch(err){
             console.log(err)
@@ -33,13 +37,17 @@ export default function AdminProductDetailPage(){
     }
 
     return (
-        <div className="card">
-            <h2>Product Detail Page</h2>
-            <div>{sneaker.name}</div>
-            <div>{sneaker.price}</div>
-            <div>{sneaker.size}</div>
-            <div>{sneaker.description}</div>
-            <button onClick={handleSubmit}>Delete</button>
+        <div>
+            <div className="card">
+                <h2>Product Detail Page</h2>
+                <div>{sneaker.name}</div>
+                <div>{sneaker.price}</div>
+                <div>{sneaker.size}</div>
+                <div>{sneaker.description}</div>
+                <button onClick={handleSubmit}>Delete</button>
+            </div>
+            <div>
+            </div>
         </div>
     )
 }
