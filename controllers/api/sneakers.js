@@ -3,6 +3,7 @@ const Sneaker = require('../../models/sneaker')
 async function create (req, res, next){
     try{
         const sneaker = await Sneaker.create(req.body);
+        console.log(req.body)
         await sneaker.save()
         res.json( { sneaker } )
     }catch(err){

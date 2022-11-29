@@ -1,6 +1,6 @@
 import { useState, } from "react";
 import { useNavigate, Link,useParams } from "react-router-dom";
-import * as adminAPI from '../../utilities/api/sneakers'
+import * as adminAPI from '../../utilities/api/admin'
 
 
 import './AddAdmin.css'
@@ -28,8 +28,8 @@ export default function AddInventoryPage() {
 
         try{
             const data = {brand, name, price, size, description}
-
             const sneaker = await adminAPI.createSneaker(data)
+            console.log(sneaker)
             navigate('/admin/product');
         }catch (err) {
             setFormData({

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { insertSneaker } from '../../utilities/api/sneakers';
+import { insertSneaker } from '../../utilities/api/admin';
 import { useNavigate } from 'react-router-dom';
 
 import Product from '../../components/Admin/AdminProduct';

@@ -1,4 +1,4 @@
-import * as adminAPI from '../api/sneakers'
+import * as adminAPI from '../api/admin'
 
 
 

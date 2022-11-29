@@ -14,7 +14,7 @@ import Banner from '../AdminPage/Banner';
 
 //helper
 import { getUser } from '../../utilities/services/users';
-import * as adminAPI from '../../utilities/api/sneakers'
+import * as adminAPI from '../../utilities/api/admin'
 
 
 import './App.css';
