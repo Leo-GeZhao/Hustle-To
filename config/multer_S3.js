@@ -7,13 +7,15 @@ const s3 = new S3Client({
     credentials: {
       secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
       accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-      region: 'us-east-1',
+      region:process.env.REGION
     }
 })
+
 
 const upload = multer({
     storage:multerS3({
         s3:s3,
+        region:'us-east-1',
         bucket:'hustleto-leozhao',
         contentType:multerS3.AUTO_CONTENT_TYPE,
         metadata: function (req, file, cb) {
@@ -24,10 +26,8 @@ const upload = multer({
             cb(null, newFileName)
           },
     }),
-    
-    if(err) {
-        console.log(err)}
 })
+
 
 module.exports = {
     upload

@@ -1,6 +1,8 @@
 import {sendRequest} from '../request'
+import axios from 'axios'
 const SNEAKER_BASE_URL = '/api/sneakers';
 const BANNER_BASE_URL = '/api/banners'
+
 
 //sneaker
 export async function createSneaker(data){
@@ -24,6 +26,10 @@ export function editSneaker(sneakerName,data) {
 }
 
 //banner
-export async function createBanner(data){
-    return sendRequest(BANNER_BASE_URL,"POST",data,"Invalid Input")
+export async function createBanner(formData){
+    await axios.post(BANNER_BASE_URL,formData,{
+        headers:{
+            'Content-Type': 'multipart/form-data'
+        }
+    })
 }
