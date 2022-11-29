@@ -23,8 +23,8 @@
   --text-dark: #615954;
 }
 
-body{
-  min-height: 100%;
+:root {
+  height: 100vh;
 }
 
 a {

@@ -10,6 +10,7 @@ import ProductPage from '../ProductPage/ProductPage';
 import AdminPage from '../AdminPage/AdminPage';
 import AddInventoryPage from '../AdminPage/AddInventoryPage';
 import AdminProductDetailPage from '../AdminPage/AdminProductDetailPage';
+import Banner from '../AdminPage/Banner';
 
 //helper
 import { getUser } from '../../utilities/services/users';
@@ -44,6 +45,8 @@ export default function App() {
               <Route path="/admin/product/:sneakerName" element={<AdminProductDetailPage setSneakers={setSneakers} sneaker={sneakers}/>} />
               
               <Route path="/admin/addinventory" element={<AddInventoryPage user={user}/>} />
+              <Route path="/admin/banner" element={<Banner user={user}/>} />
+              
             </Routes>
             <Footer user={user} setUser={setUser}/>
     </main>

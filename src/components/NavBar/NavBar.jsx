@@ -23,6 +23,7 @@ export default function NavBar({user, setUser}) {
                     <>
                     <Link to="/admin/product">Inventory</Link>
                     <Link to="/admin/addinventory">Add Inventory</Link>
+                    <Link to="/admin/banner">Banner</Link>
                     </>
                     :
                     <></>

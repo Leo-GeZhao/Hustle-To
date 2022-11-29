@@ -6,6 +6,7 @@ import * as adminAPI from '../../utilities/api/sneakers'
 import './AddAdmin.css'
 
 const defaultState = {
+    brand:'',
     name: '',
     price: '',
     size: '',
@@ -15,7 +16,7 @@ const defaultState = {
 export default function AddInventoryPage() {
     const [formData, setFormData] = useState(defaultState)
 
-    const { name, price, size, description } = formData;
+    const {brand, name, price, size, description } = formData;
 
     const navigate = useNavigate();
 
@@ -26,7 +27,7 @@ export default function AddInventoryPage() {
         e.preventDefault();
 
         try{
-            const data = {name, price, size, description}
+            const data = {brand, name, price, size, description}
 
             const sneaker = await adminAPI.createSneaker(data)
             navigate('/admin/product');
@@ -53,6 +54,9 @@ export default function AddInventoryPage() {
             <div className="">
                 <h2>Inventory</h2>
                 <form className="form" onSubmit={handleSubmit} autoComplete="off">
+                    <label htmlFor="brand">Brand</label>
+                    <input type="text" name="brand" id="brand" value={brand} onChange={handleChange} required/>
+
                     <label htmlFor="name">Name</label>
                     <input type="text" name="name" id="name" value={name} onChange={handleChange} required/>
 
