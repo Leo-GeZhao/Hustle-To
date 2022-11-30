@@ -22,8 +22,11 @@ const sneakerSchema = new Schema ({
     },
     description:{
         type:String,
-    }
-    
+    },
+    image:{
+        type:String,
+        required:true,
+    },
 }, {
     timestamps:true,
 })

@@ -5,8 +5,7 @@ async function create(req,res){
     try{
         const newBanner = new Banner(req.body)
         newBanner.image = req.file.location
-        newBanner.name= req.body.name
-        newBanner.save()
+        await newBanner.save()
         res.json(newBanner)
     }catch{
         res.status(400).json(err)

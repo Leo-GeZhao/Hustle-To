@@ -11,33 +11,31 @@ const defaultState = {
     price: '',
     size: '',
     description: '',
+    image:'',
 }
 
 export default function AddInventoryPage() {
     const [formData, setFormData] = useState(defaultState)
 
-    const {brand, name, price, size, description } = formData;
+    const {brand, name, price, size, description, image } = formData;
 
     const navigate = useNavigate();
 
-
     const handleSubmit = async (e) =>{
-        // when we submit we basically just grab whatever we have in
-        // the state.
         e.preventDefault();
-
-        try{
-            const data = {brand, name, price, size, description}
+            const data = new FormData()
+            data.append("brand",formData.brand)
+            data.append("name",formData.name)
+            data.append("price",formData.price)
+            data.append("size",formData.size)
+            data.append("description",formData.description)
+            data.append("image",formData.image)
             const sneaker = await adminAPI.createSneaker(data)
             console.log(sneaker)
             navigate('/admin/product');
-        }catch (err) {
-            setFormData({
-                ...formData,
-                error: 'Input Failed - Try again!'
-            })
         }
-    }
+    
+
 
     function handleChange(evt) {
         // Replace with new object and use a computed property
@@ -50,10 +48,18 @@ export default function AddInventoryPage() {
         setFormData(newFormData);
     }
 
-    return <div className=''>
+    function handleUpload(e){
+        const file = e.target.files[0]
+        // setFile(URL.createObjectURL(file))
+        setFormData({...formData, image:file})
+   }
+
+    return (
+
+    <div className=''>
             <div className="">
                 <h2>Inventory</h2>
-                <form className="form" onSubmit={handleSubmit} autoComplete="off">
+                <form className="form" onSubmit={handleSubmit} autoComplete="off" encType='multipart/form-data'>
                     <label htmlFor="brand">Brand</label>
                     <input type="text" name="brand" id="brand" value={brand} onChange={handleChange} required/>
 
@@ -69,8 +75,11 @@ export default function AddInventoryPage() {
                     <label htmlFor="description">Description</label>
                     <input type="text" name="description" id="description" value={description} onChange={handleChange} required />
 
-                    <button type="submit" className="btn btn-success">Input Product</button>
+                    <input type="file" id="imageInput" name="image" accept="image/png, image/jepg, image/jpg, image/webp" onChange={handleUpload}/>
+
+                    <input type="submit" value="Submit" className="btn btn-success" />
                 </form>
             </div>
         </div>
+    )
 }

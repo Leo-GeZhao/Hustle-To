@@ -5,8 +5,12 @@ const BANNER_BASE_URL = '/api/banners'
 
 
 //sneaker
-export async function createSneaker(data){
-    return sendRequest(SNEAKER_BASE_URL,"POST",data,"Invalid Input")
+export async function createSneaker(formData){
+    await axios.post(SNEAKER_BASE_URL,formData,{
+        headers:{
+            'Content-Type': 'multipart/form-data'
+        }
+    })
 }
 
 export function getSneakers() {

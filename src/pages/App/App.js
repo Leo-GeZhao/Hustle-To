@@ -36,7 +36,6 @@ export default function App() {
   useEffect(function(){
     async function getBanners(){
       const allBanners = await adminAPI.getBanners();
-      console.log(allBanners)
       setBanners(...banners,allBanners)
     }
     getBanners();
