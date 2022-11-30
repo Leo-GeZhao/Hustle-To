@@ -21,8 +21,8 @@ export default function FrontPage({sneakers,setSneakers,banners,setBanners}){
             </div>
             <div className="Footware">
                 <h5>FOOTWARE</h5>
-                <div className="container text-center">
-                    <div className="row row-cols-5">
+                <div className="container-fluid text-center">
+                    <div className="row row-cols-6">
                         {sneakers.map((s)=> <Sneaker sneaker={s}/>)}
                     </div>
                 </div>
