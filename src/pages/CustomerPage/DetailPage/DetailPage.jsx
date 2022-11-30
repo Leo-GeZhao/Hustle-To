@@ -11,7 +11,7 @@ export default function DetailPage(){
     
     const {sneakerName} = useParams()
 
-    useEffect(function(e){
+    useEffect(function(){
         async function getSneaker(sneakerName){
           const sneaker = await adminAPI.getSneaker(sneakerName);
           setSneaker(...sneaker, sneaker[0])
