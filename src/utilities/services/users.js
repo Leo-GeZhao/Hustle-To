@@ -43,7 +43,8 @@ export async function login(credentials) {
   return getUser();
 }
 
-export async function checkToken(){
-  const dateStr = await usersAPI.checkToken()
-  return new Date(dateStr)
-}
+  
+// export async function checkToken(){
+//   const dateStr = await usersAPI.checkToken()
+//   return new Date(dateStr)
+// }

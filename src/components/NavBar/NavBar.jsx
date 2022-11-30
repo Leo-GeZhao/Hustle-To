@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import * as userService from '../../utilities/services/users'
 
+import './NavBar.css'
+
 export default function NavBar({user, setUser}) {
 
   function handleLogOut(){
@@ -8,14 +10,34 @@ export default function NavBar({user, setUser}) {
     setUser(null);
   }
   return (
-    <nav>
-      <Link to="/orders">Order History</Link>
-      &nbsp; | &nbsp;
-      <Link to="/orders/new">New Order</Link>
-      &nbsp; &nbsp;
-      <Link to="" onClick={handleLogOut}>Log Out</Link>
-      &nbsp; &nbsp;
-      <span className="name">Welcome! {user.name}</span>
+    
+    <nav className="navbar navbar-expand-lg" >
+      <div className="container-fluid">
+        <Link className="navbar-brand" to="/">HustleTo</Link>
+        <div className='justify-content-end'>
+          {
+            user ? 
+              <>
+                {
+                  user.email===process.env.REACT_APP_ADMIN ?
+                    <>
+                    <Link to="/admin/product">Inventory</Link>
+                    <Link to="/admin/addinventory">Add Inventory</Link>
+                    <Link to="/admin/banner">Banner</Link>
+                    </>
+                    :
+                    <></>
+                }
+                <Link to="" onClick={handleLogOut}>Log Out</Link>
+              </>
+            :
+              <>
+                <Link to="/createaccount">Create Account</Link>
+                <Link to="/login">Log In</Link>
+              </>
+          }
+          </div>
+      </div>
     </nav>
   );
 }

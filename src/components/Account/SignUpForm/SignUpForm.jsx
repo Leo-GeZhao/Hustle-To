@@ -1,5 +1,8 @@
 import { useState } from 'react';
-import { signUp } from '../../utilities/services/users'
+import { signUp } from '../../../utilities/services/users'
+import { useNavigate } from 'react-router-dom';
+
+import './SignUpForm.css'
 
 
 const defaultState = {
@@ -10,10 +13,12 @@ const defaultState = {
     error: ''
 }
 
-export default function SignUpForm(props){
+export default function SignUpForm({setUser}){
     const [formData, setFormData] = useState(defaultState)
 
     const { name, email, password, confirm, error } = formData;
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) =>{
         // when we submit we basically just grab whatever we have in
@@ -25,8 +30,8 @@ export default function SignUpForm(props){
             const data = {name, password, email}
 
             const user = await signUp(data)
-            console.log(user) // log the response from Express server AFTER all the server code runs
-                              // and we wait for the code to finish running
+            setUser(user);
+            navigate('/');
         }catch (err) {
             setFormData({
                 ...formData,
@@ -34,13 +39,6 @@ export default function SignUpForm(props){
             })
         }
     }
-
-
-    // const handleChange = (e) => {
-    //     const newFormData = { ...formData, [e.target.name]: e.target.value }
-    //     window.alert( JSON.stringify(newFormData ) )
-    //     setFormData(newFormData)
-    // }
 
     function handleChange(evt) {
         // Replace with new object and use a computed property
@@ -57,7 +55,8 @@ export default function SignUpForm(props){
 
     return <div className='SignUpForm'>
             <div className="form-container">
-                <form onSubmit={handleSubmit} autoComplete="off">
+                <h2>Sign Up</h2>
+                <form className="form" onSubmit={handleSubmit} autoComplete="off">
                     <label htmlFor="name">Name</label>
                     <input type="text" name="name" id="name" value={name} onChange={handleChange} required/>
 
