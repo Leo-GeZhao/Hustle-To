@@ -1,5 +1,6 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const variantSchema = require('./variantSchema')
 
 const sneakerSchema = new Schema ({
     brand:{
@@ -12,14 +13,7 @@ const sneakerSchema = new Schema ({
         uppercase:true,
         required:true
     },
-    price: {
-        type:Number,
-        required:true,
-    },
-    size: {
-        type:Number,
-        required:true,
-    },
+    variant: [variantSchema],
     description:{
         type:String,
     },
