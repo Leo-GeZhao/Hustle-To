@@ -17,7 +17,7 @@ export default function Banners({banner, setBanners}){
     return (
         <div>
             {banner.name}
-            <img src={`${banner.image}`} alt="" />
+            <img className="adminBanner"src={`${banner.image}`} alt="" />
             <button onClick={handleDelete} className="btn btn-danger">Delete</button>
         </div>
     )

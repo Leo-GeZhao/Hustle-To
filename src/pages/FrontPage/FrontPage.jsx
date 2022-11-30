@@ -19,10 +19,12 @@ export default function FrontPage({sneakers,setSneakers,banners,setBanners}){
                     <span class="visually-hidden">Next</span>
                 </button>    
             </div>
-            <div className="product">
-                <h2>Product Page</h2>
-                <div className="row">
-                    {sneakers.map((s)=> <Sneaker sneaker={s}/>)}
+            <div className="Footware">
+                <h5>FOOTWARE</h5>
+                <div className="container text-center">
+                    <div className="row row-cols-6">
+                        {sneakers.map((s)=> <Sneaker sneaker={s}/>)}
+                    </div>
                 </div>
             </div>
         </div>
