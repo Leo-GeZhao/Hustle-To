@@ -61,7 +61,14 @@ export default function AddInventoryPage() {
                 <h2>Inventory</h2>
                 <form className="form" onSubmit={handleSubmit} autoComplete="off" encType='multipart/form-data'>
                     <label htmlFor="brand">Brand</label>
-                    <input type="text" name="brand" id="brand" value={brand} onChange={handleChange} required/>
+                    {/* <input type="text" name="brand" id="brand" value={brand} onChange={handleChange} required/> */}
+                    <select name="brand" id="brand" value={brand} onChange={handleChange} required>
+                        <option value={"Adidas"}>Adidas</option>
+                        <option value={"Converse"}>Converse</option>
+                        <option value={"Jordan"}>Jordan</option>
+                        <option value={"Nike"}>Nike</option>
+                        <option value={"Yeezy"}>Yeezy</option>
+                    </select>
 
                     <label htmlFor="name">Name</label>
                     <input type="text" name="name" id="name" value={name} onChange={handleChange} required/>
