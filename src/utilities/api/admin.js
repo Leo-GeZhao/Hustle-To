@@ -33,3 +33,12 @@ export async function createBanner(formData){
         }
     })
 }
+
+export function getBanners() {
+    return sendRequest(`${BANNER_BASE_URL}/banners`);
+  }
+
+  export function deleteBanner(id){
+    console.log(`${BANNER_BASE_URL}/banners/${id}`)
+    return sendRequest(`${BANNER_BASE_URL}/banners/${id}`,"DELETE")
+}

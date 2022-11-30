@@ -1,4 +1,4 @@
-export default function Card({sneaker}){
+export default function Sneaker({sneaker}){
     return (
                 <div class="card">
                     <div class="card-body">

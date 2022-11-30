@@ -1,9 +1,10 @@
 import { useState } from "react";
+import Banners from "../../components/Banners/Banners";
 import * as adminAPI from '../../utilities/api/admin'
 
 
 
-export default function Banner(){
+export default function Banner({banners, setBanners}){
 
     const defaultState = {
         name:'',
@@ -40,7 +41,7 @@ export default function Banner(){
     return (
         <div>
             <form className="form" onSubmit={handleSubmit} encType='multipart/form-data'>
-                <h2>Banner Page</h2>
+                <h2>Create A Banner</h2>
                 <label htmlFor="name">Name</label>
                 <input type="text" name="name" id="name" value={formData.name} onChange={handleChange} required/>
                 <br />
@@ -48,7 +49,8 @@ export default function Banner(){
                 <input type="submit" value="Submit" className="btn btn-success" />
             </form>
             <div>
-
+                <h2>Banners</h2>
+                {banners.map((b)=><Banners banner={b} setBanners={setBanners}/>)}
             </div>
         </div>
     )

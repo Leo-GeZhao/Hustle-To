@@ -6,7 +6,7 @@ import NavBar from '../../components/NavBar/NavBar';
 import Footer from '../../components/Footer/Footer';
 import LoginForm from '../../components/Account/LoginForm/LoginForm';
 import SignUpForm from '../../components/Account/SignUpForm/SignUpForm';
-import ProductPage from '../ProductPage/ProductPage';
+import FrontPage from '../FrontPage/FrontPage';
 import AdminPage from '../AdminPage/AdminPage';
 import AddInventoryPage from '../AdminPage/AddInventoryPage';
 import AdminProductDetailPage from '../AdminPage/AdminProductDetailPage';
@@ -23,6 +23,7 @@ import './App.css';
 export default function App() {
   const [user, setUser] = useState(getUser());
   const [sneakers, setSneakers] = useState([])
+  const [banners,setBanners] = useState([])
 
   useEffect(function(){
     async function getSneakers(){
@@ -32,6 +33,15 @@ export default function App() {
     getSneakers();
   },[]);
 
+  useEffect(function(){
+    async function getBanners(){
+      const allBanners = await adminAPI.getBanners();
+      console.log(allBanners)
+      setBanners(...banners,allBanners)
+    }
+    getBanners();
+  },[])
+
 
   return (
     <main className="App">
@@ -40,13 +50,11 @@ export default function App() {
               {/* Route components in here */}
               <Route path="/login" element={<LoginForm setUser={setUser}/>} />
               <Route path="/createaccount" element={<SignUpForm setUser={setUser}/>} />
-              <Route path="/" element={<ProductPage sneakers={sneakers} setSneakers={setSneakers} />} />
               <Route path="/admin/product" element={<AdminPage user={user} sneakers={sneakers}/>} />
               <Route path="/admin/product/:sneakerName" element={<AdminProductDetailPage setSneakers={setSneakers} sneaker={sneakers}/>} />
-              
               <Route path="/admin/addinventory" element={<AddInventoryPage user={user}/>} />
-              <Route path="/admin/banner" element={<Banner user={user}/>} />
-              
+              <Route path="/admin/banner" element={<Banner user={user} banners={banners} setBanners={setBanners}/>} />
+              <Route path="/" element={<FrontPage sneakers={sneakers} setSneakers={setSneakers} banners={banners} setBanners={setBanners} />} />
             </Routes>
             <Footer user={user} setUser={setUser}/>
     </main>
