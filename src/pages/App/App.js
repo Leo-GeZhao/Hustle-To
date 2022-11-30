@@ -6,7 +6,8 @@ import NavBar from '../../components/NavBar/NavBar';
 import Footer from '../../components/Footer/Footer';
 import LoginForm from '../../components/Account/LoginForm/LoginForm';
 import SignUpForm from '../../components/Account/SignUpForm/SignUpForm';
-import FrontPage from '../FrontPage/FrontPage';
+import LandingPage from '../CustomerPage/LandingPage/LandingPage';
+import DetailPage from '../CustomerPage/DetailPage/DetailPage';
 import AdminPage from '../AdminPage/AdminPage';
 import AddInventoryPage from '../AdminPage/AddInventoryPage';
 import AdminProductDetailPage from '../AdminPage/AdminProductDetailPage';
@@ -53,7 +54,8 @@ export default function App() {
               <Route path="/admin/product/:sneakerName" element={<AdminProductDetailPage setSneakers={setSneakers} sneaker={sneakers}/>} />
               <Route path="/admin/addinventory" element={<AddInventoryPage user={user}/>} />
               <Route path="/admin/banner" element={<Banner user={user} banners={banners} setBanners={setBanners}/>} />
-              <Route path="/" element={<FrontPage sneakers={sneakers} setSneakers={setSneakers} banners={banners} setBanners={setBanners} />} />
+              <Route path="/" element={<LandingPage sneakers={sneakers} setSneakers={setSneakers} banners={banners} setBanners={setBanners} />} />
+              <Route path="/product/:sneakerName" element={<DetailPage setSneakers={setSneakers} sneaker={sneakers}/>} />
             </Routes>
             <Footer user={user} setUser={setUser}/>
     </main>

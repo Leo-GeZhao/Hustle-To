@@ -1,0 +1,25 @@
+hr {
+    margin-top: -5px;
+    border-top:1px Solid black
+}
+
+.image {
+    height: 500px;
+}
+
+.size {
+    padding: 10px;
+    border: solid 1px black;
+}
+
+.description-title {
+    padding-top: 10px;
+    border-top:solid 1px black;
+}
+.description {
+    font-size: 14px;
+}
+
+.product-detail {
+    margin-bottom: 50px;
+}

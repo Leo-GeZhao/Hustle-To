@@ -1,8 +1,8 @@
-import Banner from "../../components/Front/Banners/Banner"
-import Sneaker from "../../components/Front/Sneakers/Sneaker"
-import './FrontPage.css'
-import Carousel from 'react-bootstrap/Carousel'
-export default function FrontPage({sneakers,setSneakers,banners,setBanners}){
+import Banner from "../../../components/Front/Banners/Banner"
+import Sneaker from "../../../components/Front/Sneakers/Sneaker"
+import './LandingPage.css'
+
+export default function LandingPage({sneakers,setSneakers,banners,setBanners}){
 
     return (
         <div>

@@ -1,3 +1,9 @@
+@media screen and (min-width:600px){
+    .carousel-item {
+        height: 1500px;
+    }
+}
+
 .carousel-item {
     height: 700px;
 }

@@ -1,4 +1,3 @@
-import { getNextKeyDef } from "@testing-library/user-event/dist/keyboard/getNextKeyDef";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
