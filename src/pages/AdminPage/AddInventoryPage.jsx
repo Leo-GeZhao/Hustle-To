@@ -60,30 +60,32 @@ export default function AddInventoryPage() {
             <div className="">
                 <h2>Inventory Information</h2>
                 <form className="form" onSubmit={handleSubmit} autoComplete="off" encType='multipart/form-data'>
-                    <label htmlFor="brand">Brand</label>
-                    <select name="brand" id="brand" className="form-control" value={brand} onChange={handleChange} required>
-                        <option value={"Adidas"}>Adidas</option>
-                        <option value={"Converse"}>Converse</option>
-                        <option value={"Jordan"}>Jordan</option>
-                        <option value={"Nike"}>Nike</option>
-                        <option value={"Yeezy"}>Yeezy</option>
-                    </select>
+                    <div className='d-flex flex-column justify-content-center align-items-center '>
+                        <label htmlFor="brand">Brand</label>
+                        <select name="brand" id="brand" className="form-control m-2" value={brand} onChange={handleChange} required>
+                            <option value={"Adidas"}>Adidas</option>
+                            <option value={"Converse"}>Converse</option>
+                            <option value={"Jordan"}>Jordan</option>
+                            <option value={"Nike"}>Nike</option>
+                            <option value={"Yeezy"}>Yeezy</option>
+                        </select>
 
-                    <label htmlFor="name">Name</label>
-                    <input type="text" name="name"  id="name" className="form-control" value={name} onChange={handleChange} required/>
+                        <label htmlFor="name">Name</label>
+                        <input type="text" name="name"  id="name" className="form-control m-2" value={name} onChange={handleChange} required/>
 
-                    <label htmlFor="size">Size</label>
-                    <input type="number" name="size" className="form-control" id="size" value={size} onChange={handleChange} required />
-                    
-                    <label htmlFor="price">Price</label>
-                    <input type="number" name="price" className="form-control" id="price" value={price} onChange={handleChange} required />
+                        <label htmlFor="size">Size</label>
+                        <input type="number" name="size" className="form-control m-2" id="size" value={size} onChange={handleChange} required />
+                        
+                        <label htmlFor="price">Price</label>
+                        <input type="number" name="price" className="form-control m-2" id="price" value={price} onChange={handleChange} required />
 
-                    <label htmlFor="description">Description</label>
-                    <input type="text-area" name="description" id="description" className="form-control" value={description} onChange={handleChange} required /> 
+                        <label htmlFor="description">Description</label>
+                        <input type="text-area" name="description" id="description" className="form-control m-2" value={description} onChange={handleChange} required /> 
 
-                    <input type="file" id="imageInput" className="form-control" name="image" accept="image/png, image/jepg, image/jpg, image/webp" onChange={handleUpload}/>
+                        <input type="file" id="imageInput" className="form-control m-2" name="image" accept="image/png, image/jepg, image/jpg, image/webp" onChange={handleUpload}/>
 
-                    <input type="submit" value="Submit" className="btn btn-success inventory-button" />
+                        <input type="submit" value="Submit" className="btn btn-success m-3" />
+                    </div>
                 </form>
             </div>
         </div>

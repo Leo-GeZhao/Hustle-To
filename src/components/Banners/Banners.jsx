@@ -21,9 +21,8 @@ export default function Banners({banner, setBanners}){
                 </div>
                 <div className='d-flex flex-column mb-3 justify-content-center align-items-center'>
                     {banner.name}
-                    <button onClick={handleDelete} className="btn btn-danger text-center">Delete</button>
-                </div>
-                
+                    <button onClick={handleDelete} className="btn btn-danger text-center m-3">Delete</button>
+                </div>     
             </div>
     )
 } 

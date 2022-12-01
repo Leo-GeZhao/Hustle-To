@@ -48,17 +48,19 @@ export default function App() {
   return (
     <main className="App">
             <NavBar user={user} setUser={setUser}/>
-            <Routes>
-              {/* Route components in here */}
-              <Route path="/login" element={<LoginForm setUser={setUser}/>} />
-              <Route path="/createaccount" element={<SignUpForm setUser={setUser}/>} />
-              <Route path="/admin/product" element={<AdminPage user={user} sneakers={sneakers}/>} />
-              <Route path="/admin/product/:sneakerName" element={<AdminProductDetailPage setSneakers={setSneakers} sneaker={sneakers}/>} />
-              <Route path="/admin/addinventory" element={<AddInventoryPage user={user}/>} />
-              <Route path="/admin/banner" element={<Banner user={user} banners={banners} setBanners={setBanners}/>} />
-              <Route path="/" element={<LandingPage sneakers={sneakers} setSneakers={setSneakers} banners={banners} setBanners={setBanners} />} />
-              <Route path="/product/:sneakerName" element={<DetailPage />} />
-            </Routes>
+            <div>
+              <Routes>
+                {/* Route components in here */}
+                <Route path="/login" element={<LoginForm setUser={setUser}/>} />
+                <Route path="/createaccount" element={<SignUpForm setUser={setUser}/>} />
+                <Route path="/admin/product" element={<AdminPage user={user} sneakers={sneakers}/>} />
+                <Route path="/admin/product/:sneakerName" element={<AdminProductDetailPage setSneakers={setSneakers} sneaker={sneakers}/>} />
+                <Route path="/admin/addinventory" element={<AddInventoryPage user={user}/>} />
+                <Route path="/admin/banner" element={<Banner user={user} banners={banners} setBanners={setBanners}/>} />
+                <Route path="/" element={<LandingPage sneakers={sneakers} setSneakers={setSneakers} banners={banners} setBanners={setBanners} />} />
+                <Route path="/product/:sneakerName" element={<DetailPage />} />
+              </Routes>
+            </div>
             <Footer user={user} setUser={setUser}/>
     </main>
   );

@@ -1,21 +1,6 @@
-.form-control {
-    width: 45%;
-}
-
-.banner-button {
-    margin-top: 14px;
-}
-
 #description {
     height:200px;
     width:400px;
     word-break: break-word;
 }
 
-#imageInput {
-    margin-top: 18px;
-}
-
-.inventory-button {
-    margin-top: 14px;
-}

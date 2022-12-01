@@ -5,7 +5,6 @@ export default function AdminPage({user, sneakers }){
 
     return <div>
                 <h2>Hello, {user.name}</h2>
-                <br />
                 <h5>Inventory List</h5>  
             <div>
             <div className="container-fluid text-center">

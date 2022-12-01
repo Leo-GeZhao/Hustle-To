@@ -13,9 +13,15 @@ a {
 }
 
 h2 {
-  margin-top: 20px;
+  margin: 20px 0;
   text-align: center;
 }
+
+.form-control {
+  width: 45%;
+}
+
+
 
 
 
