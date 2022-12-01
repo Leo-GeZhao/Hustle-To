@@ -4,6 +4,8 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import * as adminAPI from '../../utilities/api/admin'
 
+import Size from "../../components/Size/Size";
+
 const defaultState = {
     price: '',
     size: '',
@@ -76,6 +78,10 @@ export default function AdminProductDetailPage(){
         };
         setFormData(newFormData);
     }
+    
+  
+    const eachSize = sneaker.size[0].split(',')
+
 
     return (
         <div>
@@ -83,7 +89,7 @@ export default function AdminProductDetailPage(){
                 <h2>Product Detail Page</h2>
                 <div>{sneaker.name}</div>
                 <div>{sneaker.price}</div>
-                <div>{sneaker.size}</div>
+                {eachSize.map((s)=><Size size={s}/>)}
                 <div>{sneaker.description}</div>
                 <button onClick={handleDelete} className="btn btn-danger">Delete</button>
             </div>

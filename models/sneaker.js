@@ -13,7 +13,7 @@ const sneakerSchema = new Schema ({
         uppercase:true,
         required:true
     },
-    variant: [variantSchema],
+    size: [String],
     description:{
         type:String,
     },

@@ -6,10 +6,9 @@ import * as adminAPI from '../../utilities/api/admin'
 import './AddAdmin.css'
 
 const defaultState = {
-    brand:'',
+    brand:'Adidas',
     name: '',
-    price: '',
-    size: '',
+    sizeStr: '',
     description: '',
     image:'',
 }
@@ -17,18 +16,24 @@ const defaultState = {
 export default function AddInventoryPage() {
     const [formData, setFormData] = useState(defaultState)
 
-    const {brand, name, price, size, description } = formData;
+    const {brand, name, sizeStr, description } = formData;
+
+    // const size =[]
+
+    const size = sizeStr.split(',')
+
+    console.log(size)
 
     const navigate = useNavigate();
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
             const data = new FormData()
-            data.append("brand",formData.brand)
-            data.append("name",formData.name)
-            data.append('variant[price]',parseInt(formData.price))
-            data.append('variant[size]',parseInt(formData.size))
-            data.append("description",formData.description)
+            data.append("brand",brand)
+            data.append("name",name)
+            // data.append('variant[price]',parseInt(formData.price))
+            data.append('size',size)
+            data.append("description",description)
             data.append("image",formData.image)
             const sneaker = await adminAPI.createSneaker(data)
             console.log(sneaker)
@@ -61,7 +66,6 @@ export default function AddInventoryPage() {
                 <h2>Inventory</h2>
                 <form className="form" onSubmit={handleSubmit} autoComplete="off" encType='multipart/form-data'>
                     <label htmlFor="brand">Brand</label>
-                    {/* <input type="text" name="brand" id="brand" value={brand} onChange={handleChange} required/> */}
                     <select name="brand" id="brand" value={brand} onChange={handleChange} required>
                         <option value={"Adidas"}>Adidas</option>
                         <option value={"Converse"}>Converse</option>
@@ -73,11 +77,11 @@ export default function AddInventoryPage() {
                     <label htmlFor="name">Name</label>
                     <input type="text" name="name" id="name" value={name} onChange={handleChange} required/>
 
-                    <label htmlFor="price">Price</label>
-                    <input type="number" name="price" id="price" value={price} onChange={handleChange} required />
+                    {/* <label htmlFor="price">Price</label>
+                    <input type="number" name="price" id="price" value={price} onChange={handleChange} required /> */}
 
-                    <label htmlFor="size">Size</label>
-                    <input type="number" name="size" id="size" value={size} onChange={handleChange} required />
+                    <label htmlFor="sizeStr">Size</label>
+                    <input type="text" name="sizeStr" id="size" value={sizeStr} onChange={handleChange} required />
 
                     <label htmlFor="description">Description</label>
                     <input type="text" name="description" id="description" value={description} onChange={handleChange} required />
