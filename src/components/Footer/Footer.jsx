@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import './Footer.css'
 
 export default function Footer(){
@@ -6,19 +7,19 @@ export default function Footer(){
         <div className='d-flex justify-content-evenly align-items-center footer'>
             <div className='d-flex flex-column align-items-start'>
                 <div className='footer-title'>About</div>
-                <a href="#">Search</a>
-                <a href="#">About Us</a>
-                <a href="#">Contact Us</a>
-                <a href="#">Editorial</a>
-                <a href="#">All Products</a>
+                <Link to="#">Search</Link>
+                <Link to="#">About Us</Link>
+                <Link to="#">Contact Us</Link>
+                <Link to="#">Editorial</Link>
+                <Link to="#">All Products</Link>
             </div> 
             <div className='d-flex flex-column'>
                 <div className='footer-title'>Policy</div>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Shipping & Refund Policy</a>
-                <a href="#">Consignment</a>
-                <a href="#">Terms if service</a>
-                <a href="#">FAQs</a>
+                <Link to="#">Privacy Policy</Link>
+                <Link to="#">Shipping & Refund Policy</Link>
+                <Link to="#">Consignment</Link>
+                <Link to="#">Terms if service</Link>
+                <Link to="#">FAQs</Link>
             </div>
             <div className='d-flex flex-column align-items-start'>
                 <div className='footer-title'>SUBCRIBE TO OUR NEWSLETTER</div>
