@@ -2,6 +2,7 @@ import { useState } from "react";
 import Banners from "../../components/Banners/Banners";
 import * as adminAPI from '../../utilities/api/admin'
 
+import './AddAdmin.css'
 
 
 export default function Banner({banners, setBanners}){
@@ -32,9 +33,7 @@ export default function Banner({banners, setBanners}){
     const data = new FormData()
     data.append("image",formData.image)
     data.append("name",formData.name)
-    console.log(Object.fromEntries(data))
-    const uploadBanner = await adminAPI.createBanner(data)
-    console.log(uploadBanner)
+    await adminAPI.createBanner(data)
    }
 
 
@@ -45,11 +44,12 @@ export default function Banner({banners, setBanners}){
                 <label htmlFor="name">Name</label>
                 <input type="text" name="name" id="name" value={formData.name} onChange={handleChange} required/>
                 <br />
-                <input type="file" id="imageInput" name="image" accept="image/png, image/jepg, image/jpg, image/webp" onChange={handleUpload}/>
-                <input type="submit" value="Submit" className="btn btn-success" />
+                <input type="file" className="form-control" name="image" accept="image/png, image/jepg, image/jpg, image/webp" onChange={handleUpload}/>
+                <input type="submit" value="Submit" className="btn btn-success banner-button" />
             </form>
             <div>
                 <h2>Banners</h2>
+                <hr />
                 {banners.map((b)=><Banners banner={b} setBanners={setBanners}/>)}
             </div>
         </div>

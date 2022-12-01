@@ -78,31 +78,54 @@ export default function AdminProductDetailPage(){
     }
 
     return (
-        <div>
-            <div className="card">
-                <h2>Product Detail Page</h2>
-                <div>{sneaker.name}</div>
-                <div>{sneaker.price}</div>
-                <div>{sneaker.size}</div>
-                <div>{sneaker.description}</div>
-                <button onClick={handleDelete} className="btn btn-danger">Delete</button>
-            </div>
             <div>
-            <h2>Edit Product</h2>
-            <form className="form" onSubmit={handleEdit} autoComplete="off">
+                <h2>Detail</h2>
+                <div className="d-flex p-2 product-detail">
+                    <div>
+                        <img className="image"src={`${sneaker.image}`} alt="" />
+                    </div>
+                    <div className="d-flex flex-column justify-content-evenly align-items-center">
+                        <div className="d-flex flex-column align-items-center">
+                            <h5>{sneaker.brand}</h5>
+                            <p>{sneaker.name}</p>
+                            {
+                                sneaker.variant && (
+                                    <p>${sneaker.variant[0].price}.00 CAD</p> 
+                                )
+                            }
+                        </div>
+                        <div className="d-flex flex-column align-items-center">
+                            <p>SIZE</p>
+                            {
+                                sneaker.variant && (  
+                                    <div className="size">{sneaker.variant[0].size}</div>
+                                )
+                            }
+                        </div>
+                        <div>
+                            <p className="description-title">DESCRIPTION</p>
+                            <div className="description">{sneaker.description}</div>
+                            <button onClick={handleDelete} className="btn btn-danger">Delete</button>
+                        </div>
+                    </div>
+                </div> 
+                <hr />
+                <div>
+                    <h2>Edit Detail</h2>
+                    <form className="form" onSubmit={handleEdit} autoComplete="off">
 
-                    <label htmlFor="price">Price</label>
-                    <input type="number" name="price" id="price" value={price} onChange={handleChange} required />
+                            <label htmlFor="price">Price</label>
+                            <input type="number" name="price" className="form-control" id="price" value={price} onChange={handleChange} required />
 
-                    <label htmlFor="size">Size</label>
-                    <input type="number" name="size" id="size" value={size} onChange={handleChange} required />
+                            <label htmlFor="size">Size</label>
+                            <input type="number" name="size" className="form-control" id="size" value={size} onChange={handleChange} required />
 
-                    <label htmlFor="description">Description</label>
-                    <input type="text" name="description" id="description" value={description} onChange={handleChange} required />
+                            <label htmlFor="description">Description</label>
+                            <input type="text" name="description" className="form-control" id="description" value={description} onChange={handleChange} required />
 
-                    <button type="submit" className="btn btn-success">Edit Product</button>
-                </form>
+                            <button type="submit" className="btn btn-success">Edit Product</button>
+                        </form>
+                </div>
             </div>
-        </div>
     )
 }
