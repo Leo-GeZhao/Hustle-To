@@ -1,5 +1,5 @@
 import { useState, } from "react";
-import { useNavigate, Link,useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import * as adminAPI from '../../utilities/api/admin'
 
 
@@ -17,7 +17,7 @@ const defaultState = {
 export default function AddInventoryPage() {
     const [formData, setFormData] = useState(defaultState)
 
-    const {brand, name, price, size, description, image } = formData;
+    const {brand, name, price, size, description } = formData;
 
     const navigate = useNavigate();
 

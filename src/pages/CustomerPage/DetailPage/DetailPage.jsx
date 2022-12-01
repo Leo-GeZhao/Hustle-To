@@ -31,7 +31,7 @@ export default function DetailPage(){
                         <div className="d-flex flex-column align-items-center">
                             <h5>{sneaker.brand}</h5>
                             <p>{sneaker.name}</p>
-                            <p>${variant.size}.00 CAD</p>
+                            <p>${variant.price}.00 CAD</p>
                         </div>
                         <div className="d-flex flex-column align-items-center">
                             <p>SIZE</p>
