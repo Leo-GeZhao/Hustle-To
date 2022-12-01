@@ -8,18 +8,19 @@ export default function DetailPage(){
 
     const [sneaker,setSneaker] = useState('')
 
-    const [variant,setVariant] = useState([])
+    console.log(sneaker)
     
     const {sneakerName} = useParams()
 
     useEffect(function(){
         async function getSneaker(sneakerName){
           const sneaker = await adminAPI.getSneaker(sneakerName);
-          setSneaker(...sneaker, sneaker[0])
-          setVariant(...variant,sneaker[0].variant[0])
+          setSneaker(...sneaker, sneaker)
         }
          getSneaker(sneakerName)
       },[]);
+
+      
     
     return (
             <>
@@ -32,11 +33,19 @@ export default function DetailPage(){
                         <div className="d-flex flex-column align-items-center">
                             <h5>{sneaker.brand}</h5>
                             <p>{sneaker.name}</p>
-                            <p>${variant.price}.00 CAD</p>
+                            {
+                                sneaker.variant && (
+                                    <p>${sneaker.variant[0].price}.00 CAD</p> 
+                                )
+                            }
                         </div>
                         <div className="d-flex flex-column align-items-center">
                             <p>SIZE</p>
-                            <div className="size">{variant.size}</div>
+                            {
+                                sneaker.variant && (  
+                                    <div className="size">{sneaker.variant[0].size}</div>
+                                )
+                            }
                         </div>
                         <div>
                             <p className="description-title">DESCRIPTION</p>

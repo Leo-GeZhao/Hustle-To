@@ -2,7 +2,7 @@ import Banner from "../../../components/Front/Banners/Banner"
 import Sneaker from "../../../components/Front/Sneakers/Sneaker"
 import './LandingPage.css'
 
-export default function LandingPage({sneakers,setSneakers,banners,setBanners}){
+export default function LandingPage({sneakers,setSneakers,banners,setBanners,variant,setVariant}){
 
     return (
         <div>

@@ -53,25 +53,28 @@ export default function SignUpForm({setUser}){
 
     const disabled = (password !== confirm) || !name || !email || !password || !confirm
 
-    return <div className='SignUpForm'>
-            <div className="form-container">
+    return (
+        <>
                 <h2>Sign Up</h2>
                 <form className="form" onSubmit={handleSubmit} autoComplete="off">
-                    <label htmlFor="name">Name</label>
-                    <input type="text" name="name" id="name" value={name} onChange={handleChange} required/>
+                    <div className='d-flex flex-column justify-content-center align-items-center '>
+                        <label htmlFor="name" className='p-2'>Name</label>
+                        <input type="text" name="name" className='form-control' id="name" value={name} onChange={handleChange} required/>
 
-                    <label htmlFor="email">Email</label>
-                    <input type="text" name="email" id="email" value={email} onChange={handleChange} required />
+                        <label htmlFor="email" className='p-2'>Email</label>
+                        <input type="text" name="email" className='form-control' id="email" value={email} onChange={handleChange} required />
 
-                    <label htmlFor="password">Password</label>
-                    <input type="password" name="password" id="password" value={password} onChange={handleChange} required />
+                        <label htmlFor="password" className='p-2'>Password</label>
+                        <input type="password" name="password" className='form-control' id="password" value={password} onChange={handleChange} required />
 
-                    <label htmlFor="confirm">Confirm Password</label>
-                    <input type="password" name="confirm" id="confirm" value={confirm} onChange={handleChange} required />
+                        <label htmlFor="confirm" className='p-2'>Confirm Password</label>
+                        <input type="password" name="confirm" className='form-control' id="confirm" value={confirm} onChange={handleChange} required />
 
-                    <button type="submit" disabled={disabled}>Sign up</button>
+                        <button type="submit" disabled={disabled} className="btn btn-primary m-3">Sign up</button>
+                    </div>
                 </form>
-            </div>
+                
             {error && <p className="error-message">&nbsp;{error}</p>}
-        </div>
+        </>
+    )
 }
