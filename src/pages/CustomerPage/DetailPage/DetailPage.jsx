@@ -4,11 +4,11 @@ import { useParams } from "react-router-dom"
 import * as adminAPI from '../../../utilities/api/admin'
 
 import "./DetailPage.css"
-export default function DetailPage(){
+export default function DetailPage({variant,setVariant}){
 
     const [sneaker,setSneaker] = useState('')
 
-    const [variant,setVariant] = useState([])
+    
     
     const {sneakerName} = useParams()
 

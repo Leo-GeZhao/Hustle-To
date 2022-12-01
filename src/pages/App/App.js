@@ -26,6 +26,7 @@ export default function App() {
   const [user, setUser] = useState(getUser());
   const [sneakers, setSneakers] = useState([])
   const [banners,setBanners] = useState([])
+  const [variant,setVariant] = useState([])
 
   useEffect(function(){
     async function getSneakers(){
@@ -56,7 +57,7 @@ export default function App() {
               <Route path="/admin/addinventory" element={<AddInventoryPage user={user}/>} />
               <Route path="/admin/banner" element={<Banner user={user} banners={banners} setBanners={setBanners}/>} />
               <Route path="/" element={<LandingPage sneakers={sneakers} setSneakers={setSneakers} banners={banners} setBanners={setBanners} />} />
-              <Route path="/product/:sneakerName" element={<DetailPage setSneakers={setSneakers} sneaker={sneakers}/>} />
+              <Route path="/product/:sneakerName" element={<DetailPage setSneakers={setSneakers} sneaker={sneakers} variant={variant} setVariant={setVariant}/>} />
             </Routes>
             <Footer user={user} setUser={setUser}/>
     </main>
