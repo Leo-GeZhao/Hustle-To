@@ -26,7 +26,6 @@ export default function App() {
   const [user, setUser] = useState(getUser());
   const [sneakers, setSneakers] = useState([])
   const [banners,setBanners] = useState([])
-  const [variant,setVariant] = useState({size:'',price:''})
 
   useEffect(function(){
     async function getSneakers(){
