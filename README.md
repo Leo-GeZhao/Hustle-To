@@ -4,13 +4,13 @@
 
 ### Landing Page
 
-<img src = "public/ReadMe/Landing page.png">
+<img src = "public/ReadMe/Landing.png">
 
 -  Customer have access to the landing page with/without creating an account
 
 ### Detail Page
 
-<img src = "public/ReadMe/Detail page.png">
+<img src = "public/ReadMe/Detail.png">
 
 -  Customer have access to product detail page when they click on the displayed product
 
