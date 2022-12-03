@@ -30,7 +30,7 @@ export default function AddInventoryPage({sneakers,setSneakers}) {
             data.append('variant[size]',parseInt(formData.size))
             data.append("description",formData.description)
             data.append("image",formData.image)
-            const sneaker = await adminAPI.createSneaker(data)
+            await adminAPI.createSneaker(data)
             navigate('/admin/product');
         }
     
@@ -49,7 +49,6 @@ export default function AddInventoryPage({sneakers,setSneakers}) {
 
     function handleUpload(e){
         const file = e.target.files[0]
-        // setFile(URL.createObjectURL(file))
         setFormData({...formData, image:file})
    }
 

@@ -30,7 +30,7 @@ export default function App() {
   useEffect(function(){
     async function getSneakers(){
       const allSneakers = await adminAPI.getSneakers();
-      setSneakers(...sneakers,allSneakers)
+      setSneakers(...sneakers, allSneakers)
     }
     getSneakers();
   },[]);
@@ -43,7 +43,6 @@ export default function App() {
     getBanners();
   },[])
 
-
   return (
     <main className="App">
             <NavBar user={user} setUser={setUser}/>
@@ -52,7 +51,7 @@ export default function App() {
                 {/* Route components in here */}
                 <Route path="/login" element={<LoginForm setUser={setUser}/>} />
                 <Route path="/createaccount" element={<SignUpForm setUser={setUser}/>} />
-                <Route path="/admin/product" element={<AdminPage user={user} sneakers={sneakers}/>} />
+                <Route path="/admin/product" element={<AdminPage user={user} sneakers={sneakers} setSneakers={setSneakers}/>} />
                 <Route path="/admin/product/:sneakerName" element={<AdminProductDetailPage setSneakers={setSneakers} sneaker={sneakers}/>} />
                 <Route path="/admin/addinventory" element={<AddInventoryPage sneakers={sneakers} setSneakers={setSneakers}/>} />
                 <Route path="/admin/banner" element={<Banner user={user} banners={banners} setBanners={setBanners}/>} />

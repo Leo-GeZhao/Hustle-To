@@ -35,13 +35,8 @@ export default function AdminProductDetailPage(){
     
     async function handleDelete(evt){
         evt.preventDefault()
-        try {
-            await adminAPI.deleteSneaker(sneakerName);
-            setSneaker(...sneaker,'')
-            // navigate('/admin/product'); this is not working
-        }catch(err){
-            console.log(err)
-        }
+        await adminAPI.deleteSneaker(sneakerName);
+        navigate('/admin/product')
     }
 
     //Edit
