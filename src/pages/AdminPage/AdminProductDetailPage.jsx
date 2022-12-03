@@ -124,7 +124,7 @@ export default function AdminProductDetailPage(){
                             <label htmlFor="description">Description</label>
                             <input type="text" name="description" className="form-control" id="description" value={description} onChange={handleChange} required />
 
-                            <button type="submit" className="btn btn-success">Edit Product</button>
+                            <button type="submit" className="btn btn-success m-3">Edit Product</button>
                             </div>
                         </form>
                 </div>

@@ -54,7 +54,7 @@ export default function App() {
                 <Route path="/createaccount" element={<SignUpForm setUser={setUser}/>} />
                 <Route path="/admin/product" element={<AdminPage user={user} sneakers={sneakers}/>} />
                 <Route path="/admin/product/:sneakerName" element={<AdminProductDetailPage setSneakers={setSneakers} sneaker={sneakers}/>} />
-                <Route path="/admin/addinventory" element={<AddInventoryPage user={user}/>} />
+                <Route path="/admin/addinventory" element={<AddInventoryPage sneakers={sneakers} setSneakers={setSneakers}/>} />
                 <Route path="/admin/banner" element={<Banner user={user} banners={banners} setBanners={setBanners}/>} />
                 <Route path="/" element={<LandingPage sneakers={sneakers} setSneakers={setSneakers} banners={banners} setBanners={setBanners} />} />
                 <Route path="/product/:sneakerName" element={<DetailPage />} />
