@@ -56,3 +56,27 @@
 
 -   Admin can add/delete banners in 'Banner' page. All banners will be displayed in this page, and also in landing page.
 
+# Technologies Used
+-   Atlas MongoDB
+-   Express.js
+-   React.js
+-   Node.js
+-   Bootstrap
+-   CSS
+-   AWS S3
+-   Railway
+
+# Getting Started
+
+-   The Link to HustleTo deployed on Railway, can be found below.
+
+    https://hustle-to.up.railway.app/
+
+# Next Steps
+
+-   Add more relations on backend
+-   Increase UX/UI design
+-   Filter/Sort and more functions
+-   Links on footer section
+-   Add cart/Check out page/functions
+
