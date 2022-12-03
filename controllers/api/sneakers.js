@@ -47,10 +47,24 @@ async function edit(req,res){
     }
 }
 
+async function addVariant(req,res){
+    try {
+        const sneaker = await Sneaker.find({'name':req.params.sneakerName})
+        console.log(req.body)
+        const newVariant = await Variant.create()
+        sneaker.variant.push(req.body)
+        sneaker.save()
+        res.json(sneaker)
+    }catch(err){
+        res.status(400).json(err)
+    }
+}
+
 module.exports = {
     create,
     index,
     show,
     delete:deleteSneaker,
     edit,
+    add:addVariant,
 }

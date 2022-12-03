@@ -35,13 +35,8 @@ export default function AdminProductDetailPage(){
     
     async function handleDelete(evt){
         evt.preventDefault()
-        try {
-            await adminAPI.deleteSneaker(sneakerName);
-            setSneaker(...sneaker,'')
-            // navigate('/admin/product'); this is not working
-        }catch(err){
-            console.log(err)
-        }
+        await adminAPI.deleteSneaker(sneakerName);
+        navigate('/admin/product')
     }
 
     //Edit
@@ -105,7 +100,7 @@ export default function AdminProductDetailPage(){
                         <div>
                             <p className="description-title">DESCRIPTION</p>
                             <div className="description">{sneaker.description}</div>
-                            <button onClick={handleDelete} className="btn btn-danger">Delete</button>
+                            <button onClick={handleDelete} className="btn btn-danger m-1">Delete</button>
                         </div>
                     </div>
                 </div> 
@@ -113,6 +108,7 @@ export default function AdminProductDetailPage(){
                 <div>
                     <h2>Edit Detail</h2>
                     <form className="form" onSubmit={handleEdit} autoComplete="off">
+                        <div className="d-flex flex-column justify-content-evenly align-items-center">
 
                             <label htmlFor="price">Price</label>
                             <input type="number" name="price" className="form-control" id="price" value={price} onChange={handleChange} required />
@@ -123,7 +119,8 @@ export default function AdminProductDetailPage(){
                             <label htmlFor="description">Description</label>
                             <input type="text" name="description" className="form-control" id="description" value={description} onChange={handleChange} required />
 
-                            <button type="submit" className="btn btn-success">Edit Product</button>
+                            <button type="submit" className="btn btn-success m-3">Edit Product</button>
+                            </div>
                         </form>
                 </div>
             </div>
