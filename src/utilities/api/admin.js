@@ -29,6 +29,10 @@ export function editSneaker(sneakerName,data) {
     return sendRequest(`${SNEAKER_BASE_URL}/sneakers/${sneakerName}`,"PUT",data)
 }
 
+export function addVariant(sneakerName,data){
+    return sendRequest(`${SNEAKER_BASE_URL}/sneakers/${sneakerName}/variant`,"POST",data)
+}
+
 //banner
 export async function createBanner(formData){
     await axios.post(BANNER_BASE_URL,formData,{

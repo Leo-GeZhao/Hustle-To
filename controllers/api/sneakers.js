@@ -40,7 +40,10 @@ async function deleteSneaker(req,res){
 
 async function edit(req,res){
     try {
-        const updateSneaker = await Sneaker.updateOne({'name':req.params.sneakerName}, req.body)
+        const updateSneaker = await Sneaker.updateOne(
+            {'name':req.params.sneakerName},
+             req.body
+             )
         res.json(updateSneaker)
     }catch(err){
         res.status(400).json(err);
@@ -49,10 +52,10 @@ async function edit(req,res){
 
 async function addVariant(req,res){
     try {
-        const sneaker = await Sneaker.find({'name':req.params.sneakerName})
-        console.log(req.body)
-        const newVariant = await Variant.create()
-        sneaker.variant.push(req.body)
+        const sneaker = await Sneaker.findOneAndUpdate(
+            {'name':req.params.sneakerName},
+            {"$push":{variant:req.body}}
+            )
         sneaker.save()
         res.json(sneaker)
     }catch(err){

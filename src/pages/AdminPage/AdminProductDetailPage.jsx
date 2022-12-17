@@ -5,10 +5,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import * as adminAPI from '../../utilities/api/admin'
 
 const defaultState = {
-    price: '',
-    size: '',
     description: '',
 }
+
+const defaultVariant = {
+    size:"",
+    price:"",
+}
+
+
 
 export default function AdminProductDetailPage(){
 
@@ -20,14 +25,17 @@ export default function AdminProductDetailPage(){
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState(defaultState)
+    const { description } = formData;
 
-    const { price, size, description } = formData;
-    
+    const [variantData, setVariantData] = useState(defaultVariant)
+    const {size,price} = variantData
+
+    const [priceIdx, setPriceIdx] = useState(0)
+
     //Delete
     useEffect(function(){
         async function getSneaker(sneakerName){
           const sneaker = await adminAPI.getSneaker(sneakerName);
-          console.log(sneaker)
           setSneaker(...sneaker, sneaker[0])
         }
         getSneaker(sneakerName);
@@ -41,18 +49,13 @@ export default function AdminProductDetailPage(){
 
     //Edit
     const handleEdit = async (e) =>{
-        // when we submit we basically just grab whatever we have in
-        // the state.
-        e.preventDefault();
+        // e.preventDefault();
 
         try{
-            const data = { price, size, description}
+            const data = { description }
 
             const sneaker = await adminAPI.editSneaker(sneakerName,data)
-            console.log(sneaker)
             setSneaker(...sneaker, sneaker[0])
-
-            navigate('/admin/product');
         }catch (err) {
             setFormData({
                 ...formData,
@@ -61,7 +64,7 @@ export default function AdminProductDetailPage(){
         }
     }
 
-    function handleChange(evt) {
+    function handleDescription(evt) {
         // Replace with new object and use a computed property
         // to update the correct property
         const newFormData = {
@@ -72,30 +75,53 @@ export default function AdminProductDetailPage(){
         setFormData(newFormData);
     }
 
+    //Add Size
+
+    function handleSize(e){
+        const newVariantData = {
+            ...variantData,
+            [e.target.name] : e.target.value
+        };
+        setVariantData(newVariantData)
+    }
+
+    async function handleAdd(e){
+        const data = {size, price}
+        await adminAPI.addVariant(sneakerName,data)
+    }
+
+    function changePrice(e){
+        setPriceIdx(e.target.id)
+    }
+
+    
+    
     return (
             <div>
                 <h2>Detail</h2>
                 <div className="d-flex p-2 product-detail">
                     <div>
-                        <img className="image"src={`${sneaker.image}`} alt="" />
+                        <img className="image"s src={`${sneaker.image}`} alt="" />
                     </div>
                     <div className="d-flex flex-column justify-content-evenly align-items-center">
                         <div className="d-flex flex-column align-items-center">
                             <h5>{sneaker.brand}</h5>
                             <p>{sneaker.name}</p>
                             {
-                                sneaker.variant && (
-                                    <p>${sneaker.variant[0].price}.00 CAD</p> 
+                                sneaker.variant && ( 
+                                    <p>${sneaker.variant[priceIdx].price}.00 CAD</p>
                                 )
                             }
                         </div>
                         <div className="d-flex flex-column align-items-center">
                             <p>SIZE</p>
+                            <div className="d-flex">
                             {
                                 sneaker.variant && (  
-                                    <div className="size">{sneaker.variant[0].size}</div>
+                                    sneaker.variant.map((v, index)=> <button className="px-3 mx-2 btn btn-outline-dark" id={index} onClick={changePrice}>{v.size}</button>)
                                 )
                             }
+                            </div>
                         </div>
                         <div>
                             <p className="description-title">DESCRIPTION</p>
@@ -105,23 +131,31 @@ export default function AdminProductDetailPage(){
                     </div>
                 </div> 
                 <hr />
-                <div>
-                    <h2>Edit Detail</h2>
-                    <form className="form" onSubmit={handleEdit} autoComplete="off">
-                        <div className="d-flex flex-column justify-content-evenly align-items-center">
+                <div className="d-flex flex-row justify-content-around">
+                    <div>
+                        <h2>Edit Description</h2>
+                        <form className="form" onSubmit={handleEdit} autoComplete="off">
+                            <div className="d-flex flex-column justify-content-evenly align-items-center">
 
-                            <label htmlFor="price">Price</label>
-                            <input type="number" name="price" className="form-control" id="price" value={price} onChange={handleChange} required />
+                                <label htmlFor="description">Description</label>
+                                <input type="text" name="description" className="form-control" id="description" value={description} onChange={handleDescription} required />
 
-                            <label htmlFor="size">Size</label>
-                            <input type="number" name="size" className="form-control" id="size" value={size} onChange={handleChange} required />
-
-                            <label htmlFor="description">Description</label>
-                            <input type="text" name="description" className="form-control" id="description" value={description} onChange={handleChange} required />
-
-                            <button type="submit" className="btn btn-success m-3">Edit Product</button>
+                                <button type="submit" className="btn btn-success m-3">Edit Product</button>
+                                </div>
+                        </form>
+                    </div>
+                    <div>
+                        <h2>Add a Size</h2>
+                        <form className="form" onSubmit={handleAdd} autoComplete="off">
+                            <div className="d-flex flex-column justify-content-evenly align-items-center">
+                                <label htmlFor="size">Size</label>
+                                <input type="number" name="size" className="form-control" id="" value={size} onChange={handleSize}/>
+                                <label htmlFor="price">Price</label>
+                                <input type="number" name="price" className="form-control" id="" value={price} onChange={handleSize}/>
+                                <button type="submit" className="btn btn-success m-3">Add</button>
                             </div>
                         </form>
+                    </div>
                 </div>
             </div>
     )
