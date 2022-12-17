@@ -23,7 +23,6 @@ if( process.env.NODE_ENV !== 'development'){
   app.use(express.static(path.join(__dirname, 'build')));
 }
 
-app.use(require('./config/checkToken'))
 
 // API routes here
 app.use('/api/users', userRouter)
