@@ -1,14 +1,10 @@
-@media screen and (min-width:600px){
-    .carousel-item {
-        height: 1500px;
-    }
-}
-
-.carousel-item {
-    height: 700px;
-}
-
 .banner-title {
     font-size: 20px;
     color: black;
 }
+
+.banner-img {
+    margin:auto;
+    width: 100%;
+}
+
