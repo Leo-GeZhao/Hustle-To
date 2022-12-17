@@ -99,34 +99,38 @@ export default function AdminProductDetailPage(){
     return (
             <div>
                 <h2>Detail</h2>
-                <div className="d-flex p-2 product-detail">
+                <div className="d-flex justify-content-evenly p-2">
                     <div>
-                        <img className="image"s src={`${sneaker.image}`} alt="" />
-                    </div>
-                    <div className="d-flex flex-column justify-content-evenly align-items-center">
-                        <div className="d-flex flex-column align-items-center">
-                            <h5>{sneaker.brand}</h5>
-                            <p>{sneaker.name}</p>
-                            {
-                                sneaker.variant && ( 
-                                    <p>${sneaker.variant[priceIdx].price}.00 CAD</p>
-                                )
-                            }
-                        </div>
-                        <div className="d-flex flex-column align-items-center">
-                            <p>SIZE</p>
-                            <div className="d-flex">
-                            {
-                                sneaker.variant && (  
-                                    sneaker.variant.map((v, index)=> <button className="px-3 mx-2 btn btn-outline-dark" id={index} onClick={changePrice}>{v.size}</button>)
-                                )
-                            }
-                            </div>
-                        </div>
                         <div>
-                            <p className="description-title">DESCRIPTION</p>
-                            <div className="description">{sneaker.description}</div>
-                            <button onClick={handleDelete} className="btn btn-danger m-1">Delete</button>
+                            <img className="image"s src={`${sneaker.image}`} alt="" />
+                        </div>
+                    </div>
+                    <div className="product-detail d-flex justify-content-center">
+                        <div className="d-flex flex-column justify-content-evenly align-items-center">
+                            <div className="d-flex flex-column align-items-center">
+                                <h5>{sneaker.brand}</h5>
+                                <p>{sneaker.name}</p>
+                                {
+                                    sneaker.variant && ( 
+                                        <p>${sneaker.variant[priceIdx].price}.00 CAD</p>
+                                    )
+                                }
+                            </div>
+                            <div className="d-flex flex-column align-items-center">
+                                <p>SIZE</p>
+                                <div className="d-flex">
+                                {
+                                    sneaker.variant && (  
+                                        sneaker.variant.map((v, index)=> <button className="px-3 mx-2 btn btn-outline-dark" id={index} onClick={changePrice}>{v.size}</button>)
+                                    )
+                                }
+                                </div>
+                            </div>
+                            <div>
+                                <p className="description-title">DESCRIPTION</p>
+                                <div className="description">{sneaker.description}</div>
+                                <button onClick={handleDelete} className="btn btn-danger mt-2">Delete</button>
+                            </div>
                         </div>
                     </div>
                 </div> 
@@ -134,12 +138,10 @@ export default function AdminProductDetailPage(){
                 <div className="d-flex flex-row justify-content-around">
                     <div>
                         <h2>Edit Description</h2>
-                        <form className="form" onSubmit={handleEdit} autoComplete="off">
+                        <form className="form-group" onSubmit={handleEdit} autoComplete="off">
                             <div className="d-flex flex-column justify-content-evenly align-items-center">
-
                                 <label htmlFor="description">Description</label>
-                                <input type="text" name="description" className="form-control" id="description" value={description} onChange={handleDescription} required />
-
+                                <textarea name="description" className="form-control w-100 mt-2" rows="6" id="description" value={description} onChange={handleDescription} required />
                                 <button type="submit" className="btn btn-success m-3">Edit Product</button>
                                 </div>
                         </form>
@@ -150,7 +152,7 @@ export default function AdminProductDetailPage(){
                             <div className="d-flex flex-column justify-content-evenly align-items-center">
                                 <label htmlFor="size">Size</label>
                                 <input type="number" name="size" className="form-control" id="" value={size} onChange={handleSize}/>
-                                <label htmlFor="price">Price</label>
+                                <label htmlFor="price" className="mt-2">Price</label>
                                 <input type="number" name="price" className="form-control" id="" value={price} onChange={handleSize}/>
                                 <button type="submit" className="btn btn-success m-3">Add</button>
                             </div>

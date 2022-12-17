@@ -6,7 +6,7 @@ import * as adminAPI from '../../utilities/api/admin'
 import './AddAdmin.css'
 
 const defaultState = {
-    brand:'',
+    brand:'Adidas',
     name: '',
     price: '',
     size: '',

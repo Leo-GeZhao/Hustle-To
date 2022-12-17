@@ -3,6 +3,7 @@ import Product from '../../components/Admin/AdminProduct';
 
 export default function AdminPage({user, sneakers }){
 
+
     return <div>
                 <h2>Hello, {user.name}</h2>
                 <h5>Inventory List</h5>  
