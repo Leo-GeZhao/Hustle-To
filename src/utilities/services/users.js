@@ -44,7 +44,3 @@ export async function login(credentials) {
 }
 
   
-// export async function checkToken(){
-//   const dateStr = await usersAPI.checkToken()
-//   return new Date(dateStr)
-// }
