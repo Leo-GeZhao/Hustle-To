@@ -15,7 +15,7 @@ const defaultVariant = {
 
 
 
-export default function AdminProductDetailPage(){
+export default function AdminProductDetailPage({setSneakers}){
 
     
     const [sneaker,setSneaker] = useState('')
@@ -32,7 +32,7 @@ export default function AdminProductDetailPage(){
 
     const [priceIdx, setPriceIdx] = useState(0)
 
-    //Delete
+
     useEffect(function(){
         async function getSneaker(sneakerName){
           const sneaker = await adminAPI.getSneaker(sneakerName);
@@ -40,11 +40,14 @@ export default function AdminProductDetailPage(){
         }
         getSneaker(sneakerName);
       },[]);
-    
+
+    //Delete
     async function handleDelete(evt){
         evt.preventDefault()
         await adminAPI.deleteSneaker(sneakerName);
-        navigate('/admin/product')
+        const allSneakers = await adminAPI.getSneakers();
+        setSneaker(allSneakers)
+        // navigate(-1)
     }
 
     //Edit

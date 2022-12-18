@@ -29,7 +29,6 @@ export default function Banner({banners, setBanners}){
    }
 
    async function handleSubmit(e){
-    e.preventDefault();
     const data = new FormData()
     data.append("image",formData.image)
     data.append("name",formData.name)

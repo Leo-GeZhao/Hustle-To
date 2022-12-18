@@ -21,6 +21,8 @@ export default function AddInventoryPage({sneakers,setSneakers}) {
 
     const navigate = useNavigate();
 
+ 
+
     const handleSubmit = async (e) =>{
         e.preventDefault();
             const data = new FormData()
@@ -31,6 +33,8 @@ export default function AddInventoryPage({sneakers,setSneakers}) {
             data.append("description",formData.description)
             data.append("image",formData.image)
             await adminAPI.createSneaker(data)
+            const allSneakers = await adminAPI.getSneakers();
+            setSneakers(allSneakers)
             navigate('/admin/product');
         }
     
