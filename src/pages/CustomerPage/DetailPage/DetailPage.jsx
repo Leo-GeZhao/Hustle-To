@@ -21,6 +21,7 @@ export default function DetailPage(){
       },[]);
 
     
+     //size-price association
     function changePrice(e){
         setPriceIdx(e.target.id)
     }
