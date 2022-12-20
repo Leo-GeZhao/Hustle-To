@@ -7,8 +7,8 @@ import "./DetailPage.css"
 export default function DetailPage(){
 
     const [sneaker,setSneaker] = useState('')
+    const [priceIdx, setPriceIdx] = useState(0)
 
-    console.log(sneaker)
     
     const {sneakerName} = useParams()
 
@@ -20,12 +20,16 @@ export default function DetailPage(){
          getSneaker(sneakerName)
       },[]);
 
+    
+    function changePrice(e){
+        setPriceIdx(e.target.id)
+    }
+
       
     
     return (
             <>
-                <hr />
-                <div className="d-flex p-2 product-detail">
+                <div className="d-flex p-2 justify-content-evenly">
                     <div>
                         <img className="image"src={`${sneaker.image}`} alt="" />
                     </div>
@@ -34,18 +38,20 @@ export default function DetailPage(){
                             <h5>{sneaker.brand}</h5>
                             <p>{sneaker.name}</p>
                             {
-                                sneaker.variant && (
-                                    <p>${sneaker.variant[0].price}.00 CAD</p> 
-                                )
+                                    sneaker.variant && ( 
+                                        <p>${sneaker.variant[priceIdx].price}.00 CAD</p>
+                                    )
                             }
                         </div>
                         <div className="d-flex flex-column align-items-center">
                             <p>SIZE</p>
-                            {
-                                sneaker.variant && (  
-                                    <div className="size">{sneaker.variant[0].size}</div>
-                                )
-                            }
+                            <div className="d-flex">
+                                {
+                                        sneaker.variant && (  
+                                            sneaker.variant.map((v, index)=> <button className="px-3 mx-2 btn btn-outline-dark" id={index} onClick={changePrice}>{v.size}</button>)
+                                        )
+                                }
+                            </div>
                         </div>
                         <div>
                             <p className="description-title">DESCRIPTION</p>
