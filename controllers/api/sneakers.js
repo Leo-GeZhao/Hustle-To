@@ -23,7 +23,7 @@ async function index(req, res) {
 async function show(req, res) {
   try {
     const sneaker = await Sneaker.find({ name: req.params.sneakerName });
-    res.json(sneaker);
+    res.json(sneaker[0]);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -44,7 +44,7 @@ async function edit(req, res) {
       { name: req.params.sneakerName },
       req.body
     );
-    res.json(updateSneaker);
+    res.json(updateSneaker[0]);
   } catch (err) {
     res.status(400).json(err);
   }

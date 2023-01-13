@@ -4,10 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import * as adminAPI from "../../utilities/api/admin";
 
-const defaultState = {
-  description: "",
-};
-
 const defaultVariant = {
   size: "",
   price: "",
@@ -15,26 +11,29 @@ const defaultVariant = {
 
 export default function ProductDetail({ setSneakers }) {
   const [sneaker, setSneaker] = useState("");
-
+  const [update, setUpdate] = useState(false);
   const { sneakerName } = useParams();
 
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState(defaultState);
-  const { description } = formData;
+  const [description, setDescription] = useState("");
 
   const [variantData, setVariantData] = useState(defaultVariant);
   const { size, price } = variantData;
 
   const [priceIdx, setPriceIdx] = useState(0);
 
-  useEffect(function () {
-    async function getSneaker(sneakerName) {
-      const sneaker = await adminAPI.getSneaker(sneakerName);
-      setSneaker(...sneaker, sneaker[0]);
-    }
-    getSneaker(sneakerName);
-  }, []);
+  useEffect(
+    function () {
+      async function getSneaker(sneakerName) {
+        const sneaker = await adminAPI.getSneaker(sneakerName);
+        setSneaker(sneaker.data);
+      }
+      getSneaker(sneakerName);
+      setUpdate(false);
+    },
+    [update]
+  );
 
   //Delete
   async function handleDelete(evt) {
@@ -47,31 +46,12 @@ export default function ProductDetail({ setSneakers }) {
 
   //Edit
   const handleEdit = async (e) => {
-    // e.preventDefault();
-
-    try {
-      const data = { description };
-
-      const sneaker = await adminAPI.editSneaker(sneakerName, data);
-      setSneaker(...sneaker, sneaker[0]);
-    } catch (err) {
-      setFormData({
-        ...formData,
-        error: "Input Failed - Try again!",
-      });
-    }
+    e.preventDefault();
+    const data = { description };
+    await adminAPI.editSneaker(sneakerName, data);
+    setUpdate(true);
+    setDescription("");
   };
-
-  function handleDescription(evt) {
-    // Replace with new object and use a computed property
-    // to update the correct property
-    const newFormData = {
-      ...formData, // use the existing formData
-      [evt.target.name]: evt.target.value, // override whatever key with the current fieldd's value
-      error: "", // clear any old errors as soon as the user interacts with the form
-    };
-    setFormData(newFormData);
-  }
 
   //Add Size
 
@@ -151,7 +131,7 @@ export default function ProductDetail({ setSneakers }) {
                 rows="6"
                 id="description"
                 value={description}
-                onChange={handleDescription}
+                onChange={(e) => setDescription(e.target.value)}
                 required
               />
               <button type="submit" className="btn btn-success m-3">

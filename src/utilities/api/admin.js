@@ -17,7 +17,7 @@ export function getSneakers() {
 }
 
 export function getSneaker(sneakerName) {
-  return sendRequest(`${SNEAKER_BASE_URL}/sneakers/${sneakerName}`);
+  return axios.get(`${SNEAKER_BASE_URL}/sneakers/${sneakerName}`);
 }
 
 export function deleteSneaker(sneakerName) {
@@ -25,11 +25,7 @@ export function deleteSneaker(sneakerName) {
 }
 
 export function editSneaker(sneakerName, data) {
-  return sendRequest(
-    `${SNEAKER_BASE_URL}/sneakers/${sneakerName}`,
-    "PUT",
-    data
-  );
+  return axios.put(`${SNEAKER_BASE_URL}/sneakers/${sneakerName}`, data);
 }
 
 export function addVariant(sneakerName, data) {
