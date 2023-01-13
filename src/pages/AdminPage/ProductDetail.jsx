@@ -20,6 +20,7 @@ export default function ProductDetail({ setSneakers }) {
 
   const [variantData, setVariantData] = useState(defaultVariant);
   const { size, price } = variantData;
+  const [hasVariant, setHasVariant] = useState(false);
 
   const [priceIdx, setPriceIdx] = useState(0);
 
@@ -28,6 +29,7 @@ export default function ProductDetail({ setSneakers }) {
       async function getSneaker(sneakerName) {
         const sneaker = await adminAPI.getSneaker(sneakerName);
         setSneaker(sneaker.data);
+        sneaker.data.variant[0] ? setHasVariant(true) : setHasVariant(false);
       }
       getSneaker(sneakerName);
       setUpdate(false);
@@ -35,7 +37,7 @@ export default function ProductDetail({ setSneakers }) {
     [update]
   );
 
-  //Delete
+  //Delete Sneaker
   async function handleDelete(evt) {
     evt.preventDefault();
     await adminAPI.deleteSneaker(sneakerName);
@@ -44,7 +46,7 @@ export default function ProductDetail({ setSneakers }) {
     // navigate(-1)
   }
 
-  //Edit
+  //Edit Description
   const handleEdit = async (e) => {
     e.preventDefault();
     const data = { description };
@@ -64,6 +66,7 @@ export default function ProductDetail({ setSneakers }) {
   }
 
   async function handleAdd(e) {
+    e.preventDefault();
     const data = { size, price };
     await adminAPI.addVariant(sneakerName, data);
   }
@@ -89,14 +92,12 @@ export default function ProductDetail({ setSneakers }) {
             <div className="d-flex flex-column align-items-center">
               <h5>{sneaker.brand}</h5>
               <p>{sneaker.name}</p>
-              {sneaker.variant && (
-                <p>${sneaker.variant[priceIdx].price}.00 CAD</p>
-              )}
+              {hasVariant && <p>${sneaker.variant[priceIdx].price}.00 CAD</p>}
             </div>
             <div className="d-flex flex-column align-items-center">
               <p>SIZE</p>
               <div className="d-flex">
-                {sneaker.variant &&
+                {hasVariant &&
                   sneaker.variant.map((v, index) => (
                     <button
                       className="px-3 mx-2 btn btn-outline-dark"

@@ -5,8 +5,6 @@ import * as adminAPI from "../../utilities/api/admin";
 const defaultState = {
   brand: "Adidas",
   name: "",
-  price: "",
-  size: "",
   description: "",
   image: "",
 };
@@ -14,32 +12,27 @@ const defaultState = {
 export default function AddInventory({ sneakers, setSneakers }) {
   const [formData, setFormData] = useState(defaultState);
 
-  const { brand, name, price, size, description } = formData;
+  const { brand, name, description } = formData;
 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData();
-    data.append("brand", formData.brand);
-    data.append("name", formData.name);
-    data.append("variant[price]", parseInt(formData.price));
-    data.append("variant[size]", parseInt(formData.size));
-    data.append("description", formData.description);
+    data.append("brand", brand);
+    data.append("name", name);
+    data.append("description", description);
     data.append("image", formData.image);
     await adminAPI.createSneaker(data);
-    const allSneakers = await adminAPI.getSneakers();
-    setSneakers(allSneakers);
+    // const allSneakers = await adminAPI.getSneakers();
+    // setSneakers(allSneakers);
     navigate("/admin/product");
   };
 
   function handleChange(evt) {
-    // Replace with new object and use a computed property
-    // to update the correct property
     const newFormData = {
-      ...formData, // use the existing formData
-      [evt.target.name]: evt.target.value, // override whatever key with the current fieldd's value
-      error: "", // clear any old errors as soon as the user interacts with the form
+      ...formData,
+      [evt.target.name]: evt.target.value,
     };
     setFormData(newFormData);
   }
@@ -83,28 +76,6 @@ export default function AddInventory({ sneakers, setSneakers }) {
               id="name"
               className="form-control m-2"
               value={name}
-              onChange={handleChange}
-              required
-            />
-
-            <label htmlFor="size">Size</label>
-            <input
-              type="number"
-              name="size"
-              className="form-control m-2"
-              id="size"
-              value={size}
-              onChange={handleChange}
-              required
-            />
-
-            <label htmlFor="price">Price</label>
-            <input
-              type="number"
-              name="price"
-              className="form-control m-2"
-              id="price"
-              value={price}
               onChange={handleChange}
               required
             />
