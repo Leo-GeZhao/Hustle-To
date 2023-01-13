@@ -69,6 +69,8 @@ export default function ProductDetail({ setSneakers }) {
     e.preventDefault();
     const data = { size, price };
     await adminAPI.addVariant(sneakerName, data);
+    setUpdate(true);
+    setVariantData(defaultVariant);
   }
 
   function changePrice(e) {
