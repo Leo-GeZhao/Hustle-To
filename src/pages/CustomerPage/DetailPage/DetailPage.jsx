@@ -1,22 +1,32 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import * as adminAPI from "../../../utilities/api/admin";
+import * as InventoryAPI from "../../../utilities/api/inventory";
+import Sneaker from "../../../components/Front/Sneakers/Sneaker";
 
 import "./DetailPage.css";
 export default function DetailPage() {
   const [sneaker, setSneaker] = useState("");
+  const [related, setRelated] = useState([]);
   const [priceIdx, setPriceIdx] = useState(0);
 
   const { sneakerName } = useParams();
 
-  useEffect(function () {
-    async function getSneaker(sneakerName) {
-      const sneaker = await adminAPI.getSneaker(sneakerName);
-      setSneaker(sneaker);
-    }
-    getSneaker(sneakerName);
-  }, []);
+  useEffect(
+    function () {
+      async function getSneaker(sneakerName) {
+        const sneaker = await InventoryAPI.getSneaker(sneakerName);
+        setSneaker(sneaker.data);
+
+        const data = { brand: sneaker.data.brand };
+        const related = await InventoryAPI.getRelated(data);
+        setRelated(related.data);
+      }
+
+      getSneaker(sneakerName);
+    },
+    [sneakerName]
+  );
 
   //size-price association
   function changePrice(e) {
@@ -56,6 +66,15 @@ export default function DetailPage() {
             <p className="description-title">DESCRIPTION</p>
             <div className="description">{sneaker.description}</div>
           </div>
+        </div>
+      </div>
+      <div>
+        <hr />
+        <h5>RELATED PRODUCT</h5>
+        <div className="row row-cols-6">
+          {related.map((s, idx) => (
+            <Sneaker sneaker={s} key={idx} />
+          ))}
         </div>
       </div>
     </>

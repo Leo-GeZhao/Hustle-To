@@ -22,7 +22,7 @@ export default function LandingPage({ sneakers, banners }) {
     }
     getInventory();
   }, []);
-  console.log(jordan);
+
   return (
     <div>
       <div

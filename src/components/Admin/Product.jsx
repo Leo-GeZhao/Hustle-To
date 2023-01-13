@@ -7,7 +7,6 @@ export default function Product({ sneaker }) {
         <img src={`${sneaker.image}`} alt="" style={{ width: "100px" }} />
         <div className="card-body">
           <h5 className="card-title">{sneaker.name}</h5>
-          {/* {sneaker.variant && <h5>Size: {sneaker.variant[0].size}</h5>} */}
         </div>
       </div>
     </Link>

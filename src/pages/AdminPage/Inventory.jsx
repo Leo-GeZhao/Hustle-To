@@ -1,4 +1,4 @@
-import Product from "../../components/Admin/AdminProduct";
+import Product from "../../components/Admin/Product";
 
 export default function Inventory({ user, sneakers, setUpdate }) {
   console.log(sneakers);
