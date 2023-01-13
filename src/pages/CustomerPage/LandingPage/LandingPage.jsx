@@ -6,14 +6,23 @@ import "./LandingPage.css";
 
 export default function LandingPage({ sneakers, banners }) {
   const [newArrivals, setNewArrivals] = useState([]);
+  const [jordan, setJordan] = useState([]);
+  const [yeezy, setYeezy] = useState([]);
+  const [allInventory, setAllInventory] = useState([]);
   useEffect(function () {
     async function getInventory() {
       const newArrivals = await inventoryAPI.getNewArrivals();
       setNewArrivals(newArrivals.data);
+      const jordanInventory = await inventoryAPI.getJordan();
+      setJordan(jordanInventory.data);
+      const yeezyInventory = await inventoryAPI.getYeezy();
+      setYeezy(yeezyInventory.data);
+      const allInventory = await inventoryAPI.getAll();
+      setAllInventory(allInventory.data);
     }
     getInventory();
   }, []);
-
+  console.log(jordan);
   return (
     <div>
       <div
@@ -52,12 +61,40 @@ export default function LandingPage({ sneakers, banners }) {
         </button>
       </div>
       <div className="Footware">
-        <h5>NEW ARRIVALS</h5>
-        <div className="container-fluid text-center">
+        <div className="container-fluid text-center mt-5">
+          <h5>NEW ARRIVALS</h5>
           <div className="row row-cols-6">
             {newArrivals.map((s, idx) => (
               <Sneaker sneaker={s} key={idx} />
             ))}
+          </div>
+          <button className="btn btn-dark">VIEW ALL</button>
+          <div className="container-fluid text-center mt-5">
+            <h5>AIR JORDAN</h5>
+            <div className="row row-cols-6">
+              {jordan.map((s, idx) => (
+                <Sneaker sneaker={s} key={idx} />
+              ))}
+            </div>
+            <button className="btn btn-dark">VIEW ALL</button>
+          </div>
+          <div className="container-fluid text-center mt-5">
+            <h5>YEEZY</h5>
+            <div className="row row-cols-6">
+              {yeezy.map((s, idx) => (
+                <Sneaker sneaker={s} key={idx} />
+              ))}
+            </div>
+            <button className="btn btn-dark">VIEW ALL</button>
+          </div>
+          <div className="container-fluid text-center mt-5">
+            <h5>ALL PRODUCTS</h5>
+            <div className="row row-cols-6">
+              {allInventory.map((s, idx) => (
+                <Sneaker sneaker={s} key={idx} />
+              ))}
+            </div>
+            <button className="btn btn-dark">VIEW ALL</button>
           </div>
         </div>
       </div>
