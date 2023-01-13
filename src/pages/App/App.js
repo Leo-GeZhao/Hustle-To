@@ -68,12 +68,15 @@ export default function App() {
                 user={user}
                 sneakers={sneakers}
                 setSneakers={setSneakers}
+                setUpdate={setUpdate}
               />
             }
           />
           <Route
             path="/admin/product/:sneakerName"
-            element={<ProductDetail setSneakers={setSneakers} />}
+            element={
+              <ProductDetail setSneakers={setSneakers} setUpdate={setUpdate} />
+            }
           />
           <Route
             path="/admin/addinventory"

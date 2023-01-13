@@ -9,9 +9,9 @@ const defaultVariant = {
   price: "",
 };
 
-export default function ProductDetail({ setSneakers }) {
+export default function ProductDetail({ setSneakers, setUpdate }) {
   const [sneaker, setSneaker] = useState("");
-  const [update, setUpdate] = useState(false);
+  const [detailUpdate, setDetailUpdate] = useState(false);
   const { sneakerName } = useParams();
 
   const navigate = useNavigate();
@@ -32,16 +32,17 @@ export default function ProductDetail({ setSneakers }) {
         sneaker.data.variant[0] ? setHasVariant(true) : setHasVariant(false);
       }
       getSneaker(sneakerName);
-      setUpdate(false);
+      setDetailUpdate(false);
     },
-    [update]
+    [detailUpdate]
   );
 
   //Delete Sneaker
   const handleDelete = async (e) => {
     e.preventDefault();
     await adminAPI.deleteSneaker(sneakerName);
-    navigate("admin/product");
+    setUpdate(true);
+    navigate("/admin/product");
   };
 
   //Edit Description
@@ -49,7 +50,7 @@ export default function ProductDetail({ setSneakers }) {
     e.preventDefault();
     const data = { description };
     await adminAPI.editSneaker(sneakerName, data);
-    setUpdate(true);
+    setDetailUpdate(true);
     setDescription("");
   };
 
@@ -67,7 +68,7 @@ export default function ProductDetail({ setSneakers }) {
     e.preventDefault();
     const data = { size, price };
     await adminAPI.addVariant(sneakerName, data);
-    setUpdate(true);
+    setDetailUpdate(true);
     setVariantData(defaultVariant);
   };
 

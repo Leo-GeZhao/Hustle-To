@@ -21,7 +21,7 @@ export function getSneaker(sneakerName) {
 }
 
 export function deleteSneaker(sneakerName) {
-  return sendRequest(`${SNEAKER_BASE_URL}/sneakers/${sneakerName}`, "DELETE");
+  return axios.delete(`${SNEAKER_BASE_URL}/sneakers/${sneakerName}`);
 }
 
 export function editSneaker(sneakerName, data) {

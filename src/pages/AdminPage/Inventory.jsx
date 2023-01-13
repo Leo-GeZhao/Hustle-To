@@ -1,6 +1,6 @@
 import Product from "../../components/Admin/AdminProduct";
 
-export default function Inventory({ user, sneakers }) {
+export default function Inventory({ user, sneakers, setUpdate }) {
   console.log(sneakers);
   return (
     <div>
@@ -10,7 +10,7 @@ export default function Inventory({ user, sneakers }) {
         <div className="container-fluid text-center">
           <div className="row row-cols-6">
             {sneakers.map((s) => (
-              <Product sneaker={s} />
+              <Product sneaker={s} setUpdate={setUpdate} />
             ))}
           </div>
         </div>
