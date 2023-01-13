@@ -1,6 +1,7 @@
 import Product from "../../components/Admin/AdminProduct";
 
 export default function Inventory({ user, sneakers }) {
+  console.log(sneakers);
   return (
     <div>
       <h2>Hello, {user.name}</h2>

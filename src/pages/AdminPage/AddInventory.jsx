@@ -9,7 +9,7 @@ const defaultState = {
   image: "",
 };
 
-export default function AddInventory({ sneakers, setSneakers }) {
+export default function AddInventory({ sneakers, setSneakers, setUpdate }) {
   const [formData, setFormData] = useState(defaultState);
 
   const { brand, name, description } = formData;
@@ -24,8 +24,7 @@ export default function AddInventory({ sneakers, setSneakers }) {
     data.append("description", description);
     data.append("image", formData.image);
     await adminAPI.createSneaker(data);
-    // const allSneakers = await adminAPI.getSneakers();
-    // setSneakers(allSneakers);
+    setUpdate(true);
     navigate("/admin/product");
   };
 

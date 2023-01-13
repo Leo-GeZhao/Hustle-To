@@ -26,13 +26,17 @@ export default function App() {
   const [banners, setBanners] = useState([]);
   const [update, setUpdate] = useState(false);
 
-  useEffect(function () {
-    async function getSneakers() {
-      const allSneakers = await adminAPI.getSneakers();
-      setSneakers(...sneakers, allSneakers);
-    }
-    getSneakers();
-  }, []);
+  useEffect(
+    function () {
+      async function getSneakers() {
+        const sneakers = await adminAPI.getSneakers();
+        setSneakers(sneakers);
+      }
+      getSneakers();
+      setUpdate(false);
+    },
+    [update]
+  );
 
   useEffect(
     function () {
@@ -74,7 +78,11 @@ export default function App() {
           <Route
             path="/admin/addinventory"
             element={
-              <AddInventory sneakers={sneakers} setSneakers={setSneakers} />
+              <AddInventory
+                sneakers={sneakers}
+                setSneakers={setSneakers}
+                setUpdate={setUpdate}
+              />
             }
           />
           <Route
