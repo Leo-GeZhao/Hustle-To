@@ -1,32 +1,66 @@
-import Banner from "../../../components/Front/Banners/Banner"
-import Sneaker from "../../../components/Front/Sneakers/Sneaker"
-import './LandingPage.css'
+import { useEffect, useState } from "react";
+import Banner from "../../../components/Front/Banners/Banner";
+import Sneaker from "../../../components/Front/Sneakers/Sneaker";
+import * as inventoryAPI from "../../../utilities/api/inventory";
+import "./LandingPage.css";
 
-export default function LandingPage({sneakers,banners}){
+export default function LandingPage({ sneakers, banners }) {
+  const [newArrivals, setNewArrivals] = useState([]);
+  useEffect(function () {
+    async function getInventory() {
+      const newArrivals = await inventoryAPI.getNewArrivals();
+      setNewArrivals(newArrivals.data);
+    }
+    getInventory();
+  }, []);
 
-    return (
-        <div>
-            <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
-                <div className="carousel-inner">
-                {banners.map((b, idx)=><Banner banner={b} key={idx}/>)}
-                </div>
-                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Previous</span>
-                </button>
-                <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Next</span>
-                </button>    
-            </div>
-            <div className="Footware">
-                <h5>FOOTWARE</h5>
-                <div className="container-fluid text-center">
-                    <div className="row row-cols-6">
-                        {sneakers.map((s,idx)=> <Sneaker sneaker={s} key={idx}/>)}
-                    </div>
-                </div>
-            </div>
+  return (
+    <div>
+      <div
+        id="carouselExampleControls"
+        className="carousel slide"
+        data-bs-ride="carousel"
+      >
+        <div className="carousel-inner">
+          {banners.map((b, idx) => (
+            <Banner banner={b} key={idx} />
+          ))}
         </div>
-    )
+        <button
+          className="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleControls"
+          data-bs-slide="prev"
+        >
+          <span
+            className="carousel-control-prev-icon"
+            aria-hidden="true"
+          ></span>
+          <span className="visually-hidden">Previous</span>
+        </button>
+        <button
+          className="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleControls"
+          data-bs-slide="next"
+        >
+          <span
+            className="carousel-control-next-icon"
+            aria-hidden="true"
+          ></span>
+          <span className="visually-hidden">Next</span>
+        </button>
+      </div>
+      <div className="Footware">
+        <h5>NEW ARRIVALS</h5>
+        <div className="container-fluid text-center">
+          <div className="row row-cols-6">
+            {newArrivals.map((s, idx) => (
+              <Sneaker sneaker={s} key={idx} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
