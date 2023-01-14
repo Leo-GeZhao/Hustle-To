@@ -39,7 +39,10 @@ export default function DetailPage() {
         <div>
           <img className="image" src={`${sneaker.image}`} alt="" />
         </div>
-        <div className="d-flex flex-column justify-content-evenly align-items-center">
+        <div
+          className="d-flex flex-column justify-content-evenly align-items-center"
+          style={{ width: "500px" }}
+        >
           <div className="d-flex flex-column align-items-center">
             <h5>{sneaker.brand}</h5>
             <p>{sneaker.name}</p>
