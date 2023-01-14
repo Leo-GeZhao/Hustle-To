@@ -8,3 +8,7 @@ export function addToCart(data) {
 export function getCart(data) {
   return axios.post(`${BASE_URL}/getCart`, data);
 }
+
+export function deleteItem(data) {
+  return axios.post(`${BASE_URL}/deleteItem`, data);
+}

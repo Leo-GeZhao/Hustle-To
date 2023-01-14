@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./checkoutItem.css";
+import * as cartAPI from "../../utilities/api/cart";
 
-const CheckoutItem = ({ item }) => {
+const CheckoutItem = ({ item, user, setUpdate }) => {
   const [quantity, setQuantity] = useState(1);
 
   const minusQty = () => {
@@ -14,6 +15,12 @@ const CheckoutItem = ({ item }) => {
   const addQty = () => {
     document.getElementById("subButton").disabled = false;
     setQuantity(quantity + 1);
+  };
+
+  const handleDelete = async () => {
+    const data = { id: item._id, user: user._id };
+    await cartAPI.deleteItem(data);
+    setUpdate(true);
   };
 
   return (
@@ -46,7 +53,9 @@ const CheckoutItem = ({ item }) => {
         </div>
       </td>
       <td className="item-list">
-        <button className="btn btn-outline-dark">Remove</button>
+        <button className="btn btn-outline-dark" onClick={handleDelete}>
+          Remove
+        </button>
       </td>
     </tr>
   );

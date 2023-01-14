@@ -39,4 +39,17 @@ async function get(req, res, next) {
   }
 }
 
-module.exports = { add, get };
+async function deleteOne(req, res, next) {
+  try {
+    const cart = await Cart.findOneAndUpdate(
+      { user: req.body.user },
+      { $pull: { orderDetail: { _id: req.body.id } } },
+      { new: true }
+    );
+    res.status(200).json(cart);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+}
+
+module.exports = { add, get, delete: deleteOne };

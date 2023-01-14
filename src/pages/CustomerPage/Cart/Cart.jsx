@@ -2,17 +2,21 @@ import React, { useEffect, useState } from "react";
 import * as cartAPI from "../../../utilities/api/cart";
 import CheckoutItem from "../../../components/CheckoutItem/CheckoutItem";
 
-const Cart = ({ user }) => {
+const Cart = ({ user, setUpdate, update }) => {
   const [cart, setCart] = useState(null);
-  useEffect(function () {
-    async function getCart() {
-      const data = { user: user._id };
-      console.log(data);
-      const cart = await cartAPI.getCart(data);
-      setCart(cart.data);
-    }
-    getCart();
-  }, []);
+  useEffect(
+    function () {
+      async function getCart() {
+        const data = { user: user._id };
+        console.log(data);
+        const cart = await cartAPI.getCart(data);
+        setCart(cart.data);
+      }
+      getCart();
+      setUpdate(true);
+    },
+    [update]
+  );
 
   console.log(cart);
   return (
@@ -32,7 +36,10 @@ const Cart = ({ user }) => {
             </tr>
           </thead>
           <tbody className="cart-body">
-            {cart && cart.orderDetail.map((c) => <CheckoutItem item={c} />)}
+            {cart &&
+              cart.orderDetail.map((c) => (
+                <CheckoutItem item={c} user={user} setUpdate={setUpdate} />
+              ))}
           </tbody>
         </table>
       </div>
