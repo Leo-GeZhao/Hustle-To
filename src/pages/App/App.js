@@ -119,7 +119,7 @@ export default function App() {
             element={<DetailPage user={user} />}
           />
           <Route path="/:brand" element={<Product />} />
-          <Route path="/cart" element={<Checkout />} />
+          <Route path="/cart" element={<Checkout user={user} />} />
         </Routes>
       </div>
       <Footer user={user} setUser={setUser} />

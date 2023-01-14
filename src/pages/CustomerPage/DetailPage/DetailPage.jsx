@@ -45,12 +45,13 @@ export default function DetailPage({ user }) {
       name: sneaker.name,
       size: variant.size,
       price: variant.price,
+      image: sneaker.image,
     };
-
-    console.log(data);
 
     await cartAPI.addToCart(data);
   };
+
+  console.log(sneaker);
 
   return (
     <>

@@ -4,19 +4,23 @@ const orderDetailSchema = new Schema(
   {
     brand: {
       type: String,
-      //   required: true,
+      required: true,
     },
     name: {
       type: String,
-      //   required: true,
+      required: true,
     },
     size: {
       type: String,
-      //   required: true,
+      required: true,
     },
     price: {
       type: String,
-      //   required: true,
+      required: true,
+    },
+    image: {
+      type: String,
+      required: true,
     },
   },
   {
