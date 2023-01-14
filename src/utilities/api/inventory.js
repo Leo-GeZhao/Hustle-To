@@ -5,12 +5,8 @@ export function getNewArrivals() {
   return axios.get(`${BASE_URL}/newArrivals`);
 }
 
-export function getJordan() {
-  return axios.get(`${BASE_URL}/jordan`);
-}
-
-export function getYeezy() {
-  return axios.get(`${BASE_URL}/yeezy`);
+export function getbrand(data) {
+  return axios.post(`${BASE_URL}/brand`, data);
 }
 
 export function getAll() {

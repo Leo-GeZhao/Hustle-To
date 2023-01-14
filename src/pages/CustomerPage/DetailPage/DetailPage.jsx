@@ -18,7 +18,7 @@ export default function DetailPage() {
         const sneaker = await InventoryAPI.getSneaker(sneakerName);
         setSneaker(sneaker.data);
 
-        const data = { brand: sneaker.data.brand };
+        const data = { brand: sneaker.data.brand, name: sneakerName };
         const related = await InventoryAPI.getRelated(data);
         setRelated(related.data);
       }

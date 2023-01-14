@@ -13,6 +13,7 @@ import Inventory from "../AdminPage/Inventory";
 import AddInventory from "../AdminPage/AddInventory";
 import ProductDetail from "../AdminPage/ProductDetail";
 import Banner from "../AdminPage/Banner";
+import Product from "../../components/Product/Product";
 
 //helper
 import { getUser } from "../../utilities/services/users";
@@ -111,7 +112,9 @@ export default function App() {
               />
             }
           />
+
           <Route path="/product/:sneakerName" element={<DetailPage />} />
+          <Route path="/:brand" element={<Product />} />
         </Routes>
       </div>
       <Footer user={user} setUser={setUser} />

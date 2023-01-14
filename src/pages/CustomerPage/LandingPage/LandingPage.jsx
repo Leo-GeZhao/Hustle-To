@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Banner from "../../../components/Front/Banners/Banner";
 import Sneaker from "../../../components/Front/Sneakers/Sneaker";
 import * as inventoryAPI from "../../../utilities/api/inventory";
@@ -11,18 +12,19 @@ export default function LandingPage({ sneakers, banners }) {
   const [allInventory, setAllInventory] = useState([]);
   useEffect(function () {
     async function getInventory() {
-      const newArrivals = await inventoryAPI.getNewArrivals();
+      const newArrivals = await inventoryAPI.getbrand({
+        brand: "NEW-ARRIVALS",
+      });
       setNewArrivals(newArrivals.data);
-      const jordanInventory = await inventoryAPI.getJordan();
+      const jordanInventory = await inventoryAPI.getbrand({ brand: "jordan" });
       setJordan(jordanInventory.data);
-      const yeezyInventory = await inventoryAPI.getYeezy();
+      const yeezyInventory = await inventoryAPI.getbrand({ brand: "yeezy" });
       setYeezy(yeezyInventory.data);
-      const allInventory = await inventoryAPI.getAll();
+      const allInventory = await inventoryAPI.getbrand({ brand: "ALL" });
       setAllInventory(allInventory.data);
     }
     getInventory();
   }, []);
-
   return (
     <div>
       <div
@@ -68,7 +70,9 @@ export default function LandingPage({ sneakers, banners }) {
               <Sneaker sneaker={s} key={idx} />
             ))}
           </div>
-          <button className="btn btn-dark">VIEW ALL</button>
+          <Link to={`/NEW-ARRIVALS`}>
+            <button className="btn btn-dark">VIEW ALL</button>
+          </Link>
           <div className="container-fluid text-center mt-5">
             <h5>AIR JORDAN</h5>
             <div className="row row-cols-6">
@@ -76,7 +80,9 @@ export default function LandingPage({ sneakers, banners }) {
                 <Sneaker sneaker={s} key={idx} />
               ))}
             </div>
-            <button className="btn btn-dark">VIEW ALL</button>
+            <Link to={`/JORDAN`}>
+              <button className="btn btn-dark">VIEW ALL</button>
+            </Link>
           </div>
           <div className="container-fluid text-center mt-5">
             <h5>YEEZY</h5>
@@ -85,7 +91,9 @@ export default function LandingPage({ sneakers, banners }) {
                 <Sneaker sneaker={s} key={idx} />
               ))}
             </div>
-            <button className="btn btn-dark">VIEW ALL</button>
+            <Link to={`/YEEZY`}>
+              <button className="btn btn-dark">VIEW ALL</button>
+            </Link>
           </div>
           <div className="container-fluid text-center mt-5">
             <h5>ALL PRODUCTS</h5>
@@ -94,7 +102,9 @@ export default function LandingPage({ sneakers, banners }) {
                 <Sneaker sneaker={s} key={idx} />
               ))}
             </div>
-            <button className="btn btn-dark">VIEW ALL</button>
+            <Link to={`/ALL`}>
+              <button className="btn btn-dark">VIEW ALL</button>
+            </Link>
           </div>
         </div>
       </div>
