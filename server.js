@@ -24,6 +24,7 @@ app.use("/api/users", require("./routes/api/users"));
 app.use("/api/sneakers", require("./routes/api/sneakers"));
 app.use("/api/banners", require("./routes/api/banners"));
 app.use("/api/inventories", require("./routes/api/inventories"));
+app.use("/api/carts", require("./routes/api/carts"));
 
 // "Catch all" route
 app.get("/*", function (req, res) {

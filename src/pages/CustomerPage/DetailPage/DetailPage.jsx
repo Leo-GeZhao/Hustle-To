@@ -1,13 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import * as InventoryAPI from "../../../utilities/api/inventory";
+import * as inventoryAPI from "../../../utilities/api/inventory";
+import * as cartAPI from "../../../utilities/api/cart";
 import Sneaker from "../../../components/Front/Sneakers/Sneaker";
 
 import "./DetailPage.css";
-export default function DetailPage() {
+export default function DetailPage({ user }) {
   const [sneaker, setSneaker] = useState("");
   const [related, setRelated] = useState([]);
+
+  const [variant, setVariant] = useState(null);
   const [priceIdx, setPriceIdx] = useState(0);
 
   const { sneakerName } = useParams();
@@ -15,11 +18,11 @@ export default function DetailPage() {
   useEffect(
     function () {
       async function getSneaker(sneakerName) {
-        const sneaker = await InventoryAPI.getSneaker(sneakerName);
+        const sneaker = await inventoryAPI.getSneaker(sneakerName);
         setSneaker(sneaker.data);
 
         const data = { brand: sneaker.data.brand, name: sneakerName };
-        const related = await InventoryAPI.getRelated(data);
+        const related = await inventoryAPI.getRelated(data);
         setRelated(related.data);
       }
 
@@ -29,13 +32,29 @@ export default function DetailPage() {
   );
 
   //size-price association
-  function changePrice(e) {
+  const changePrice = (e) => {
     setPriceIdx(e.target.id);
-  }
+    setVariant(sneaker.variant[e.target.id]);
+  };
+
+  //Add Cart
+  const handleAddCart = async (e) => {
+    const data = {
+      user: user._id,
+      brand: sneaker.brand,
+      name: sneaker.name,
+      size: variant.size,
+      price: variant.price,
+    };
+
+    console.log(data);
+
+    await cartAPI.addToCart(data);
+  };
 
   return (
     <>
-      <div className="d-flex p-2 justify-content-evenly">
+      <div className="d-flex mt-3 p-2 justify-content-evenly">
         <div>
           <img className="image" src={`${sneaker.image}`} alt="" />
         </div>
@@ -69,9 +88,22 @@ export default function DetailPage() {
                   ))}
             </div>
           </div>
+          <button
+            className="btn btn-outline-dark m-4 w-100"
+            onClick={handleAddCart}
+          >
+            <div className="pt-3 ">
+              {sneaker.variant && (
+                <p>ADD TO CART | ${sneaker.variant[priceIdx].price}.00 CAD</p>
+              )}
+            </div>
+          </button>
           <div>
             <p className="description-title">DESCRIPTION</p>
             <div className="description">{sneaker.description}</div>
+          </div>
+          <div>
+            <p className="mt-3">100% AUTHENTICITY GUARANTEED</p>
           </div>
         </div>
       </div>
