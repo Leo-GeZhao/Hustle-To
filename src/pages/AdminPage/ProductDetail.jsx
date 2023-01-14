@@ -32,10 +32,13 @@ export default function ProductDetail({ setSneakers, setUpdate }) {
         sneaker.data.variant[0] ? setHasVariant(true) : setHasVariant(false);
       }
       getSneaker(sneakerName);
+
       setDetailUpdate(false);
     },
     [detailUpdate]
   );
+
+  console.log(sneaker);
 
   //Delete Sneaker
   const handleDelete = async (e) => {
@@ -99,15 +102,19 @@ export default function ProductDetail({ setSneakers, setUpdate }) {
               <p>SIZE</p>
               <div className="d-flex">
                 {hasVariant &&
-                  sneaker.variant.map((v, index) => (
-                    <button
-                      className="px-3 mx-2 btn btn-outline-dark"
-                      id={index}
-                      onClick={changePrice}
-                    >
-                      {v.size}
-                    </button>
-                  ))}
+                  sneaker.variant
+                    .sort((s1, s2) =>
+                      s1.size > s2.size ? 1 : s1.size < s2.size ? -1 : 0
+                    )
+                    .map((v, index) => (
+                      <button
+                        className="px-3 mx-2 btn btn-outline-dark"
+                        id={index}
+                        onClick={changePrice}
+                      >
+                        {v.size}
+                      </button>
+                    ))}
               </div>
             </div>
             <div>
