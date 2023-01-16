@@ -45,6 +45,7 @@ const Cart = ({ user, setUpdate, update }) => {
               ))}
           </tbody>
         </table>
+        <button className="btn btn-outline-dark">Check Out</button>
       </div>
     </div>
   );

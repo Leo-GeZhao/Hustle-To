@@ -9,6 +9,7 @@ import "./DetailPage.css";
 export default function DetailPage({ user }) {
   const [sneaker, setSneaker] = useState("");
   const [related, setRelated] = useState([]);
+  const [size, setSize] = useState(null);
 
   const [variant, setVariant] = useState(null);
   const [priceIdx, setPriceIdx] = useState(0);
@@ -35,6 +36,7 @@ export default function DetailPage({ user }) {
   const changePrice = (e) => {
     setPriceIdx(e.target.id);
     setVariant(sneaker.variant[e.target.id]);
+    setSize(e.target.textContent);
   };
 
   //Add Cart
@@ -50,8 +52,6 @@ export default function DetailPage({ user }) {
 
     await cartAPI.addToCart(data);
   };
-
-  console.log(sneaker);
 
   return (
     <>
@@ -71,7 +71,7 @@ export default function DetailPage({ user }) {
             )}
           </div>
           <div className="d-flex flex-column align-items-center">
-            <p>SIZE</p>
+            <p>SIZE {size && `| ${size}`} </p>
             <div className="d-flex">
               {sneaker.variant &&
                 sneaker.variant
@@ -95,7 +95,10 @@ export default function DetailPage({ user }) {
           >
             <div className="pt-3 ">
               {sneaker.variant && (
-                <p>ADD TO CART | ${sneaker.variant[priceIdx].price}.00 CAD</p>
+                <p>
+                  ADD TO CART | ${sneaker.variant[priceIdx].price}
+                  .00 CAD
+                </p>
               )}
             </div>
           </button>
