@@ -52,4 +52,24 @@ async function deleteOne(req, res, next) {
   }
 }
 
-module.exports = { add, get, delete: deleteOne };
+async function changeQty(req, res, next) {
+  try {
+    // const cart = await Cart.findOne({ user: req.body.user });
+    const updatedCart = await Cart.findOneAndUpdate(
+      { user: req.body.user, "orderDetail._id": req.body.id },
+      {
+        $set: {
+          "orderDetail.$.quantity": req.body.quantity,
+        },
+      }
+    );
+    console.log(updatedCart);
+    // console.log(cart);
+
+    res.status(200).json();
+  } catch (err) {
+    res.status(400).json(err);
+  }
+}
+
+module.exports = { add, get, delete: deleteOne, changeQty };

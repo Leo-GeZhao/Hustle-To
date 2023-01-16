@@ -8,7 +8,6 @@ const Cart = ({ user, setUpdate, update }) => {
     function () {
       async function getCart() {
         const data = { user: user._id };
-        console.log(data);
         const cart = await cartAPI.getCart(data);
         setCart(cart.data);
       }
@@ -18,7 +17,6 @@ const Cart = ({ user, setUpdate, update }) => {
     [update]
   );
 
-  console.log(cart);
   return (
     <div>
       <div className="text-center mt-3">
@@ -37,8 +35,13 @@ const Cart = ({ user, setUpdate, update }) => {
           </thead>
           <tbody className="cart-body">
             {cart &&
-              cart.orderDetail.map((c) => (
-                <CheckoutItem item={c} user={user} setUpdate={setUpdate} />
+              cart.orderDetail.map((c, idx) => (
+                <CheckoutItem
+                  item={c}
+                  user={user}
+                  setUpdate={setUpdate}
+                  idx={idx + 1}
+                />
               ))}
           </tbody>
         </table>

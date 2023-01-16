@@ -2,19 +2,23 @@ import React, { useState } from "react";
 import "./checkoutItem.css";
 import * as cartAPI from "../../utilities/api/cart";
 
-const CheckoutItem = ({ item, user, setUpdate }) => {
-  const [quantity, setQuantity] = useState(1);
-
-  const minusQty = () => {
-    if (quantity === 1) {
-      document.getElementById("subButton").disabled = true;
+const CheckoutItem = ({ item, user, setUpdate, idx }) => {
+  const minusQty = async () => {
+    if (item.quantity <= 2) {
+      document.getElementById(idx).disabled = true;
+      console.log(document.getElementById(idx + 1));
     }
-    setQuantity(quantity - 1);
+    // console.log(id);
+    const data = { user: user._id, id: item._id, quantity: item.quantity - 1 };
+    await cartAPI.changeQty(data);
+    setUpdate(true);
   };
 
-  const addQty = () => {
-    document.getElementById("subButton").disabled = false;
-    setQuantity(quantity + 1);
+  const addQty = async () => {
+    document.getElementById(idx).disabled = false;
+    const data = { user: user._id, id: item._id, quantity: item.quantity + 1 };
+    await cartAPI.changeQty(data);
+    setUpdate(true);
   };
 
   const handleDelete = async () => {
@@ -35,14 +39,14 @@ const CheckoutItem = ({ item, user, setUpdate }) => {
       <td className="item-list">
         <div className="border">
           <button
-            id="subButton"
+            id={idx}
             className="btn btn-link"
             style={{ "text-decoration": "none" }}
             onClick={() => minusQty()}
           >
             -
           </button>
-          {quantity}
+          {item.quantity}
           <button
             className="btn btn-link "
             style={{ "text-decoration": "none" }}

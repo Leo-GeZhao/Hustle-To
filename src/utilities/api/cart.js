@@ -12,3 +12,7 @@ export function getCart(data) {
 export function deleteItem(data) {
   return axios.post(`${BASE_URL}/deleteItem`, data);
 }
+
+export function changeQty(data) {
+  return axios.post(`${BASE_URL}/changeQty`, data);
+}
