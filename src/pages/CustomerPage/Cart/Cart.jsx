@@ -4,6 +4,9 @@ import axios from "axios";
 import CheckoutItem from "../../../components/CheckoutItem/CheckoutItem";
 
 const Cart = ({ user, setUpdate, update, cart }) => {
+  // console.log(
+  //   cart.orderDetail.map((c) => Number(c.price)).reduce((a, b) => a + b, 0)
+  // );
   const handleCheckout = async () => {
     const data = { orderDetail: cart.orderDetail };
     const checkout = await axios.post(
@@ -41,6 +44,17 @@ const Cart = ({ user, setUpdate, update, cart }) => {
               ))}
           </tbody>
         </table>
+        <div className="d-flex justify-content-end me-2">
+          {cart && (
+            <p>
+              Total: $
+              {cart.orderDetail
+                .map((c) => Number(c.price))
+                .reduce((a, b) => a + b, 0)}{" "}
+              .00 CAD
+            </p>
+          )}
+        </div>
         <button className="btn btn-outline-dark" onClick={handleCheckout}>
           Check Out
         </button>
