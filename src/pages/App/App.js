@@ -75,10 +75,13 @@ export default function App() {
       <div>
         <Routes>
           {/* Route components in here */}
-          <Route path="/login" element={<LoginForm setUser={setUser} />} />
+          <Route
+            path="/login"
+            element={<LoginForm setUser={setUser} setUpdate={setUpdate} />}
+          />
           <Route
             path="/createaccount"
-            element={<SignUpForm setUser={setUser} />}
+            element={<SignUpForm setUser={setUser} setUpdate={setUpdate} />}
           />
           <Route
             path="/admin/product"
