@@ -16,6 +16,7 @@ import Banner from "../AdminPage/Banner";
 import Product from "../../components/Product/Product";
 import Checkout from "../CustomerPage/Cart/Cart";
 import Success from "../CustomerPage/Success/Success";
+import OrderHistory from "../CustomerPage/OrderHistory/OrderHistory";
 
 //helper
 import { getUser } from "../../utilities/services/users";
@@ -150,6 +151,17 @@ export default function App() {
             path="/success"
             element={
               <Success
+                user={user}
+                // update={update}
+                // setUpdate={setUpdate}
+                // cart={cart}
+              />
+            }
+          />
+          <Route
+            path="/orders"
+            element={
+              <OrderHistory
                 user={user}
                 // update={update}
                 // setUpdate={setUpdate}

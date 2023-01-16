@@ -10,8 +10,11 @@ const cartSchema = new Schema(
       required: true,
     },
     orderDetail: [orderDetailSchema],
+    isPaid: {
+      type: Boolean,
+      default: false,
+    },
   },
-
   {
     timestamps: true,
   }

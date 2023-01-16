@@ -36,6 +36,9 @@ export default function NavBar({ user, setUser, cart }) {
                       )}
                     </span>
                   </Link>
+                  <Link to="/orders">
+                    <span className="me-3">Order History</span>
+                  </Link>
                 </>
               )}
 

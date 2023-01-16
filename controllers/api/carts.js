@@ -2,10 +2,13 @@ const Cart = require("../../models/carts");
 
 async function add(req, res, next) {
   try {
-    const customerCart = await Cart.findOne({ user: req.body.user });
+    const customerCart = await Cart.findOne({
+      user: req.body.user,
+      isPaid: false,
+    });
     if (customerCart) {
       const updatedCart = await Cart.findOneAndUpdate(
-        { user: req.body.user },
+        { user: req.body.user, isPaid: false },
         { $push: { orderDetail: req.body } }
       );
       await updatedCart.save();
@@ -32,7 +35,7 @@ async function add(req, res, next) {
 
 async function get(req, res, next) {
   try {
-    const cart = await Cart.findOne({ user: req.body.user });
+    const cart = await Cart.findOne({ user: req.body.user, isPaid: false });
     res.status(200).json(cart);
   } catch (err) {
     res.status(400).json(err);
@@ -42,7 +45,7 @@ async function get(req, res, next) {
 async function deleteOne(req, res, next) {
   try {
     const cart = await Cart.findOneAndUpdate(
-      { user: req.body.user },
+      { user: req.body.user, isPaid: false },
       { $pull: { orderDetail: { _id: req.body.id } } },
       { new: true }
     );
@@ -63,8 +66,6 @@ async function changeQty(req, res, next) {
         },
       }
     );
-    console.log(updatedCart);
-    // console.log(cart);
 
     res.status(200).json();
   } catch (err) {
