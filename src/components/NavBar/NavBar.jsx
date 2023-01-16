@@ -4,7 +4,6 @@ import * as userService from "../../utilities/services/users";
 import "./NavBar.css";
 
 export default function NavBar({ user, setUser, cart }) {
-  console.log(cart);
   function handleLogOut() {
     userService.logout();
     setUser(null);
