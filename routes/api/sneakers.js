@@ -9,5 +9,6 @@ router.get('/sneakers', sneakersCtrl.index)
 router.get('/sneakers/:sneakerName',sneakersCtrl.show)
 router.delete('/sneakers/:sneakerName', sneakersCtrl.delete)
 router.put('/sneakers/:sneakerName', sneakersCtrl.edit)
+router.post('/sneakers/:sneakerName/variant',sneakersCtrl.add)
 
 module.exports = router;
