@@ -25,18 +25,23 @@ export default function NavBar({ user, setUser, cart }) {
                   <Link to="/admin/banner">Banner</Link>
                 </>
               ) : (
-                <></>
+                <>
+                  {" "}
+                  <Link to="/cart">
+                    <span className="me-3">
+                      Cart
+                      {cart && !!cart.orderDetail.length && (
+                        <span className="position-absolute top-30 start-10 translate-middle badge rounded-circle text-bg-dark ms-2">
+                          {cart.orderDetail.length}
+                        </span>
+                      )}
+                    </span>
+                  </Link>
+                </>
               )}
-              <Link to="/cart">
-                Cart
-                {cart && !!cart.orderDetail.length && (
-                  <span className="position-absolute top-30 start-10 translate-middle badge rounded-circle text-bg-dark ms-2">
-                    {cart.orderDetail.length}
-                  </span>
-                )}
-              </Link>
+
               <Link to="" onClick={handleLogOut}>
-                <span className="ms-4">Log Out</span>
+                <span>Log Out</span>
               </Link>
             </>
           ) : (
