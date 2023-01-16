@@ -19,6 +19,7 @@ import Checkout from "../CustomerPage/Cart/Cart";
 //helper
 import { getUser } from "../../utilities/services/users";
 import * as adminAPI from "../../utilities/api/admin";
+import * as cartAPI from "../../utilities/api/cart";
 
 import "./App.css";
 
@@ -26,6 +27,7 @@ export default function App() {
   const [user, setUser] = useState(getUser());
   const [sneakers, setSneakers] = useState([]);
   const [banners, setBanners] = useState([]);
+  const [cart, setCart] = useState(null);
   const [update, setUpdate] = useState(false);
 
   useEffect(
@@ -52,9 +54,22 @@ export default function App() {
     [update]
   );
 
+  useEffect(
+    function () {
+      async function getCart() {
+        const data = { user: user._id };
+        const cart = await cartAPI.getCart(data);
+        setCart(cart.data);
+      }
+      getCart();
+      setUpdate(false);
+    },
+    [update]
+  );
+
   return (
     <main className="App">
-      <NavBar user={user} setUser={setUser} />
+      <NavBar user={user} setUser={setUser} cart={cart} />
       <div>
         <Routes>
           {/* Route components in here */}
@@ -116,13 +131,18 @@ export default function App() {
 
           <Route
             path="/product/:sneakerName"
-            element={<DetailPage user={user} />}
+            element={<DetailPage user={user} setUpdate={setUpdate} />}
           />
           <Route path="/:brand" element={<Product />} />
           <Route
             path="/cart"
             element={
-              <Checkout user={user} update={update} setUpdate={setUpdate} />
+              <Checkout
+                user={user}
+                update={update}
+                setUpdate={setUpdate}
+                cart={cart}
+              />
             }
           />
         </Routes>

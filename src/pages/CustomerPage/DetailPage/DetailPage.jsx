@@ -6,7 +6,7 @@ import * as cartAPI from "../../../utilities/api/cart";
 import Sneaker from "../../../components/Front/Sneakers/Sneaker";
 
 import "./DetailPage.css";
-export default function DetailPage({ user }) {
+export default function DetailPage({ user, setUpdate }) {
   const [sneaker, setSneaker] = useState("");
   const [related, setRelated] = useState([]);
   const [size, setSize] = useState(null);
@@ -51,6 +51,7 @@ export default function DetailPage({ user }) {
     };
 
     await cartAPI.addToCart(data);
+    setUpdate(true);
   };
 
   return (

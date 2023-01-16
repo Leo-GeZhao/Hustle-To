@@ -3,7 +3,8 @@ import * as userService from "../../utilities/services/users";
 
 import "./NavBar.css";
 
-export default function NavBar({ user, setUser }) {
+export default function NavBar({ user, setUser, cart }) {
+  console.log(cart);
   function handleLogOut() {
     userService.logout();
     setUser(null);
@@ -26,9 +27,16 @@ export default function NavBar({ user, setUser }) {
               ) : (
                 <></>
               )}
-              <Link to="/cart">Cart</Link>
+              <Link to="/cart">
+                Cart
+                {cart && !!cart.orderDetail.length && (
+                  <span className="position-absolute top-30 start-10 translate-middle badge rounded-circle text-bg-dark ms-2">
+                    {cart.orderDetail.length}
+                  </span>
+                )}
+              </Link>
               <Link to="" onClick={handleLogOut}>
-                Log Out
+                <span className="ms-4">Log Out</span>
               </Link>
             </>
           ) : (
