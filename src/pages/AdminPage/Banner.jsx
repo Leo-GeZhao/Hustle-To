@@ -1,57 +1,76 @@
 import { useState } from "react";
 import Banners from "../../components/Banners/Banners";
-import * as adminAPI from '../../utilities/api/admin'
+import * as adminAPI from "../../utilities/api/admin";
 
+const defaultState = {
+  name: "",
+  image: "",
+};
 
+export default function Banner({ banners, setBanners, update, setUpdate }) {
+  const [formData, setFormData] = useState(defaultState);
+  const { name, image } = formData;
 
-export default function Banner({banners, setBanners}){
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-    const defaultState = {
-        name:'',
-        image:'',
-    } 
+  const handleUpload = (e) => {
+    const file = e.target.files[0];
+    setFormData({ ...formData, image: file });
+  };
 
-    const [formData, setFormData] = useState(defaultState)
-    
-    
-
-   function handleChange(e){
-    setFormData({...formData, [e.target.name]:e.target.value})
-    
-   }
-
-    function handleUpload(e){
-        const file = e.target.files[0]
-        // setFile(URL.createObjectURL(file))
-        setFormData({...formData, image:file})
-        // console.log(banner.image)
-   }
-
-   async function handleSubmit(e){
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = new FormData()
-    data.append("image",formData.image)
-    data.append("name",formData.name)
-    console.log(Object.fromEntries(data))
-    const uploadBanner = await adminAPI.createBanner(data)
-    console.log(uploadBanner)
-   }
+    const data = new FormData();
+    data.append("image", image);
+    data.append("name", name);
+    await adminAPI.createBanner(data);
+    setUpdate(true);
+    setFormData(defaultState);
+  };
 
-
-    return (
-        <div>
-            <form className="form" onSubmit={handleSubmit} encType='multipart/form-data'>
-                <h2>Create A Banner</h2>
-                <label htmlFor="name">Name</label>
-                <input type="text" name="name" id="name" value={formData.name} onChange={handleChange} required/>
-                <br />
-                <input type="file" id="imageInput" name="image" accept="image/png, image/jepg, image/jpg, image/webp" onChange={handleUpload}/>
-                <input type="submit" value="Submit" className="btn btn-success" />
-            </form>
-            <div>
-                <h2>Banners</h2>
-                {banners.map((b)=><Banners banner={b} setBanners={setBanners}/>)}
-            </div>
+  return (
+    <>
+      <h2>Create A Banner</h2>
+      <form
+        className="form"
+        onSubmit={handleSubmit}
+        encType="multipart/form-data"
+      >
+        <div className="d-flex flex-column justify-content-center align-items-center ">
+          <label htmlFor="name">Title</label>
+          <input
+            type="text"
+            className="form-control mb-4"
+            name="name"
+            id="name"
+            value={name}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="file"
+            className="form-control"
+            name="image"
+            accept="image/png, image/jepg, image/jpg, image/webp"
+            onChange={handleUpload}
+          />
+          <input type="submit" value="Submit" className="btn btn-success m-3" />
         </div>
-    )
+      </form>
+      <div>
+        <h2>Banners</h2>
+        <hr />
+        {banners.map((b) => (
+          <Banners
+            banner={b}
+            setBanners={setBanners}
+            update={update}
+            setUpdate={setUpdate}
+          />
+        ))}
+      </div>
+    </>
+  );
 }

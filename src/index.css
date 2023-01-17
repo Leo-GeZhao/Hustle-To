@@ -12,6 +12,17 @@ a {
   color:black;
 }
 
+h2 {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.form-control {
+  width: 45%;
+}
+
+
+
 
 
 

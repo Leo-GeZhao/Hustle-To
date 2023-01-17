@@ -1,23 +1,82 @@
-1. Clone the mern-infrastructure repo: git clone <url of mern-infrastructure> <name-of-project>
+# HustleTo - Your Best Local Sneaker Shop
 
-2. Note that the folder created will be same as <name-of-project> instead of mern-infrastructure
+## Product Page
 
-3. cd <name-of-project>
+### Landing Page
 
-4. Install the Node modules: npm i
+<img src = "public/ReadMe/Landing.png">
 
-5. Create a .env (touch .env) and add entries for DATABASE_URL and SECRET
+-  Customer have access to the landing page with/without creating an account
 
-6. Update the "name": "mern-infrastructure" in package.json to the name of your project.
+### Detail Page
 
-7. Create a new repo on your personal GH account.
+<img src = "public/ReadMe/Detail.png">
 
-8. Copy the new GH repo's URL.
+-  Customer have access to product detail page when they click on the displayed product
 
-9. Update the remote's URL: git remote set-url origin <paste the copied GH url>
+## Create Account/Login Page
 
-10. Make the initial commit: git add -A && git commit -m "Initial commit"
+<img src = "public/ReadMe/Create Account.png">
 
-11. Push for the first time: git push -u origin main
+-  Customer can create accounts 
 
-12. Have fun coding your new project and don't forget to make frequent commits!
+<img src = "public/ReadMe/Create Account.png">
+
+-  Registered customer can login to access more futures (future)
+
+## Admin Page
+
+### Admin Navbar
+
+<img src = "public/ReadMe/Admin Navbar.png">
+
+-   Admin will have a different header when they login, they will have access to create/update/delete products, banners etc.
+
+### Admin Create Inventory
+
+<img src = "public/ReadMe/Create Inventory.png">
+
+-   Admin add inventory by creating them in 'Add Inventory' Page
+
+### Admin Inventory List
+
+<img src = "public/ReadMe/Admin Inventory List.png">
+
+-   All inventory are listed in inventory page
+
+### Admin Inventory Detail
+
+<img src = "public/ReadMe/Admin Inventory Detail.png">
+
+-   Admin can delete/update inventory on 'Inventory Detail' Page
+
+## Banner Page
+
+<img src = "public/ReadMe/Banner.png">
+
+-   Admin can add/delete banners in 'Banner' page. All banners will be displayed in this page, and also in landing page.
+
+# Technologies Used
+-   Atlas MongoDB
+-   Express.js
+-   React.js
+-   Node.js
+-   Bootstrap
+-   CSS
+-   AWS S3
+-   Railway
+
+# Getting Started
+
+-   The Link to HustleTo deployed on Railway, can be found below.
+
+    https://hustle-to.up.railway.app/
+
+# Next Steps
+
+-   Add more relations on backend
+-   Increase UX/UI design
+-   Filter/Sort and more functions
+-   Links on footer section
+-   Add cart/Check out page/functions
+

@@ -1,25 +1,27 @@
 hr {
-    margin-top: -5px;
-    border-top:1px Solid black
+  margin-top: -5px;
+  border-top: 1px Solid black;
 }
 
 .image {
-    height: 500px;
+  height: 500px;
 }
 
 .size {
-    padding: 10px;
-    border: solid 1px black;
+  padding: 10px;
+  border: solid 1px black;
 }
 
 .description-title {
-    padding-top: 10px;
-    border-top:solid 1px black;
+  padding-top: 10px;
+  border-top: solid 1px black;
 }
 .description {
-    font-size: 14px;
+  font-size: 14px;
+  padding-bottom: 10px;
+  border-bottom: solid 1px black;
 }
 
 .product-detail {
-    margin-bottom: 50px;
+  margin-bottom: 50px;
 }
