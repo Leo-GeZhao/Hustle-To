@@ -24,8 +24,8 @@ async function checkout(req, res, next) {
         };
       }),
       mode: "payment",
-      success_url: "http://localhost:3000/success",
-      cancel_url: "http://localhost:3000/cart",
+      success_url: `${process.env.STRIPE_URL}/success`,
+      cancel_url: `${process.env.STRIPE_URL}/cart`,
     });
     res.status(200).json({ url: session.url });
   } catch (err) {
