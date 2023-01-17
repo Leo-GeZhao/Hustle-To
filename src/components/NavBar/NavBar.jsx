@@ -8,6 +8,9 @@ export default function NavBar({ user, setUser, cart }) {
     userService.logout();
     setUser(null);
   }
+
+  console.log(user.email);
+  console.log(process.env.REACT_APP_ADMIN);
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid">
