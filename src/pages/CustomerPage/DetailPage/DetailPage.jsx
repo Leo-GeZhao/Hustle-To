@@ -6,6 +6,7 @@ import * as cartAPI from "../../../utilities/api/cart";
 import Sneaker from "../../../components/Front/Sneakers/Sneaker";
 
 import "./DetailPage.css";
+import { isDisabled } from "@testing-library/user-event/dist/utils";
 export default function DetailPage({ user, setUpdate }) {
   const [sneaker, setSneaker] = useState("");
   const [related, setRelated] = useState([]);
@@ -91,8 +92,9 @@ export default function DetailPage({ user, setUpdate }) {
             </div>
           </div>
           <button
+            type="button"
             className="btn btn-outline-dark m-4 w-100"
-            onClick={handleAddCart}
+            disabled={!user}
           >
             <div className="pt-3 ">
               {sneaker.variant && (
