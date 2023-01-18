@@ -42,6 +42,7 @@ export default function DetailPage({ user, setUpdate }) {
 
   //Add Cart
   const handleAddCart = async (e) => {
+    console.log(e);
     const data = {
       user: user._id,
       brand: sneaker.brand,
@@ -92,9 +93,9 @@ export default function DetailPage({ user, setUpdate }) {
             </div>
           </div>
           <button
-            type="button"
             className="btn btn-outline-dark m-4 w-100"
             disabled={!user}
+            onClick={handleAddCart}
           >
             <div className="pt-3 ">
               {sneaker.variant && (
