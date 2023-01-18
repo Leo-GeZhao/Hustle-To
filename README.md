@@ -1,5 +1,16 @@
 # HustleTo - Your Best Local Sneaker Shop
 
+## Test credential
+
+- Admin Role:
+
+  - email: admin@gmail.com
+    password:123456
+
+- Customer Role:
+  - email: test@gmail.com
+    password:123456
+
 ## Product Page
 
 ### Landing Page
@@ -22,47 +33,53 @@
 
 <img src = "public/ReadMe/Stripe.png">
 
+### Order History Page
+
+<img src = "public/ReadMe/Order.png">
+
+- Customer can manage their order in order history page.
+
 ## Create Account/Login Page
 
-<img src = "public/ReadMe/Create Account.png">
+<img src = "public/ReadMe/Signup.png">
 
 - Customer can create accounts
 
 <img src = "public/ReadMe/Create Account.png">
 
-- Registered customer can login to access more futures (future)
+- Registered customer can login to access more futures
 
 ## Admin Page
 
 ### Admin Navbar
 
-<img src = "public/ReadMe/Admin Navbar.png">
+<img src = "public/ReadMe/Nav.png">
 
-- Admin will have a different header when they login, they will have access to create/update/delete products, banners etc.
+- Admin will have a different header with admin account login, they can create/update/delete products, banners etc.
 
 ### Admin Create Inventory
 
-<img src = "public/ReadMe/Create Inventory.png">
+<img src = "public/ReadMe/Add.png">
 
-- Admin add inventory by creating them in 'Add Inventory' Page
+- Admin add inventory in 'Add Inventory' Page
 
 ### Admin Inventory List
 
-<img src = "public/ReadMe/Admin Inventory List.png">
+<img src = "public/ReadMe/Inventory.png">
 
 - All inventory are listed in inventory page
 
 ### Admin Inventory Detail
 
-<img src = "public/ReadMe/Admin Inventory Detail.png">
+<img src = "public/ReadMe/AdminDetail.png">
 
-- Admin can delete/update inventory on 'Inventory Detail' Page
+- Admin can delete/update inventory information/sizes on 'Inventory Detail' Page
 
 ## Banner Page
 
 <img src = "public/ReadMe/Banner.png">
 
-- Admin can add/delete banners in 'Banner' page. All banners will be displayed in this page, and also in landing page.
+- Admin can add/delete banners in 'Banner' page. All banners will be displayed in landing page (curousal).
 
 # Technologies Used
 
@@ -73,18 +90,10 @@
 - Bootstrap
 - CSS
 - AWS S3
-- Railway
+- Heroku
 
 # Getting Started
 
-- The Link to HustleTo deployed on Railway, can be found below.
+- The Link to HustleTo deployed on heroku, can be found below.
 
-  https://hustle-to.up.railway.app/
-
-# Next Steps
-
-- Add more relations on backend
-- Increase UX/UI design
-- Filter/Sort and more functions
-- Links on footer section
-- Add cart/Check out page/functions
+  https://hustle-to.herokuapp.com/
