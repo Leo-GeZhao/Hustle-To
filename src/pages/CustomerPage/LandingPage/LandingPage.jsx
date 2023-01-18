@@ -15,13 +15,13 @@ export default function LandingPage({ sneakers, banners }) {
       const newArrivals = await inventoryAPI.getbrand({
         brand: "NEW-ARRIVALS",
       });
-      setNewArrivals(newArrivals.data);
+      setNewArrivals(newArrivals.data.slice(0, 5));
       const jordanInventory = await inventoryAPI.getbrand({ brand: "jordan" });
-      setJordan(jordanInventory.data);
+      setJordan(jordanInventory.data.slice(0, 5));
       const yeezyInventory = await inventoryAPI.getbrand({ brand: "yeezy" });
-      setYeezy(yeezyInventory.data);
+      setYeezy(yeezyInventory.data.slice(0, 5));
       const allInventory = await inventoryAPI.getbrand({ brand: "ALL" });
-      setAllInventory(allInventory.data);
+      setAllInventory(allInventory.data.slice(0, 5));
     }
     getInventory();
   }, []);
