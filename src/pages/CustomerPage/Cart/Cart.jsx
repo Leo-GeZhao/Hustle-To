@@ -47,7 +47,7 @@ const Cart = ({ user, setUpdate, update, cart }) => {
                   Total: $
                   {cart.orderDetail
                     .map((c) => Number(c.price))
-                    .reduce((a, b) => a + b, 0)}{" "}
+                    .reduce((a, b) => a + b, 0)}
                   .00 CAD
                 </p>
               )}
