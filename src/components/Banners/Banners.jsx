@@ -1,12 +1,16 @@
+//Admin API
 import * as adminAPI from "../../utilities/api/admin";
+
 import "./Banners.css";
-export default function Banners({ banner, setBanners, update, setUpdate }) {
-  async function handleDelete(e) {
+
+export default function Banners({ banner, setUpdate }) {
+  //Handle Delete Banner
+  const handleDelete = async (e) => {
     e.preventDefault();
     const data = { id: banner._id };
     await adminAPI.deleteBanner(data);
     setUpdate(true);
-  }
+  };
 
   return (
     <div className="d-flex flex-row mb-3 justify-content-around align-items-center">

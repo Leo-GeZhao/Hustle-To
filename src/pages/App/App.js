@@ -18,8 +18,10 @@ import Checkout from "../CustomerPage/Cart/Cart";
 import Success from "../CustomerPage/Success/Success";
 import OrderHistory from "../CustomerPage/OrderHistory/OrderHistory";
 
-//helper
+//User Service
 import { getUser } from "../../utilities/services/users";
+
+//APIs
 import * as adminAPI from "../../utilities/api/admin";
 import * as cartAPI from "../../utilities/api/cart";
 
@@ -32,37 +34,41 @@ export default function App() {
   const [cart, setCart] = useState(null);
   const [update, setUpdate] = useState(false);
 
+  //Get All Sneakers
   useEffect(
     function () {
-      async function getSneakers() {
+      const getSneakers = async () => {
         const sneakers = await adminAPI.getSneakers();
-        setSneakers(sneakers);
-      }
+        setSneakers(sneakers.data);
+      };
       getSneakers();
       setUpdate(false);
     },
     [update]
   );
 
+  //Get All Banners
   useEffect(
     function () {
-      async function getBanners() {
+      const getBanners = async () => {
         const Banners = await adminAPI.getBanners();
         setBanners(Banners.data);
-      }
+      };
       getBanners();
       setUpdate(false);
     },
     [update]
   );
 
+  // Get the Customer Cart
   useEffect(
     function () {
-      async function getCart() {
+      const getCart = async () => {
         const data = { user: user._id };
         const cart = await cartAPI.getCart(data);
         setCart(cart.data);
-      }
+      };
+
       getCart();
       setUpdate(false);
     },
@@ -74,7 +80,6 @@ export default function App() {
       <NavBar user={user} setUser={setUser} cart={cart} />
       <div>
         <Routes>
-          {/* Route components in here */}
           <Route
             path="/login"
             element={<LoginForm setUser={setUser} setUpdate={setUpdate} />}
@@ -122,17 +127,7 @@ export default function App() {
               />
             }
           />
-          <Route
-            path="/"
-            element={
-              <LandingPage
-                sneakers={sneakers}
-                setSneakers={setSneakers}
-                banners={banners}
-                setBanners={setBanners}
-              />
-            }
-          />
+          <Route path="/" element={<LandingPage banners={banners} />} />
 
           <Route
             path="/product/:sneakerName"
@@ -141,26 +136,9 @@ export default function App() {
           <Route path="/:brand" element={<Product />} />
           <Route
             path="/cart"
-            element={
-              <Checkout
-                user={user}
-                update={update}
-                setUpdate={setUpdate}
-                cart={cart}
-              />
-            }
+            element={<Checkout user={user} setUpdate={setUpdate} cart={cart} />}
           />
-          <Route
-            path="/success"
-            element={
-              <Success
-                user={user}
-                // update={update}
-                // setUpdate={setUpdate}
-                // cart={cart}
-              />
-            }
-          />
+          <Route path="/success" element={<Success user={user} />} />
           <Route
             path="/orders"
             element={

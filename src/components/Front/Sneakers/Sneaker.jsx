@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
+
 import "./Sneakers.css";
 
 export default function Sneaker({ sneaker }) {
+  //Find the Lowest Price among Single Sneaker' Variant
   const lowestPrice = Math.min(...sneaker.variant.map((s) => s.price));
+
   return (
     <Link to={`/product/${sneaker.name}`}>
       <div className="card col">

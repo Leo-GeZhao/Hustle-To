@@ -15,10 +15,14 @@ app.use(express.json());
 app.use(favicon(path.join(__dirname, "build", "favicon.ico")));
 app.use(express.static(path.join(__dirname, "build")));
 
-// API routes here
+// Routes
 app.use("/api/users", require("./routes/api/users"));
+
+//Admin Managing Sneakers
 app.use("/api/sneakers", require("./routes/api/sneakers"));
 app.use("/api/banners", require("./routes/api/banners"));
+
+//Customer Page Getting Inventories
 app.use("/api/inventories", require("./routes/api/inventories"));
 app.use("/api/carts", require("./routes/api/carts"));
 app.use("/api/checkouts", require("./routes/api/checkouts"));

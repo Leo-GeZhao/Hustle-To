@@ -2,19 +2,25 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
+//Admin API
 import * as adminAPI from "../../utilities/api/admin";
 
+//Default State for Variant (Size&Price)
 const defaultVariant = {
   size: "",
   price: "",
 };
 
 export default function ProductDetail({ setSneakers, setUpdate }) {
-  const [sneaker, setSneaker] = useState("");
-  const [detailUpdate, setDetailUpdate] = useState(false);
+  //Get the Sneaker Name from URL
   const { sneakerName } = useParams();
 
+  //Navigate to other Pages
   const navigate = useNavigate();
+
+  const [sneaker, setSneaker] = useState("");
+  const [detailUpdate, setDetailUpdate] = useState(false);
+  const [priceIdx, setPriceIdx] = useState(0);
 
   const [description, setDescription] = useState("");
 
@@ -22,23 +28,22 @@ export default function ProductDetail({ setSneakers, setUpdate }) {
   const { size, price } = variantData;
   const [hasVariant, setHasVariant] = useState(false);
 
-  const [priceIdx, setPriceIdx] = useState(0);
-
+  //Get Sneaker based on Sneaker Name
   useEffect(
     function () {
-      async function getSneaker(sneakerName) {
+      const getSneaker = async (sneakerName) => {
         const sneaker = await adminAPI.getSneaker(sneakerName);
         setSneaker(sneaker.data);
+
+        //Check if sneaker has any variants. If not, will not show the size section
         sneaker.data.variant[0] ? setHasVariant(true) : setHasVariant(false);
-      }
+      };
       getSneaker(sneakerName);
 
       setDetailUpdate(false);
     },
     [detailUpdate]
   );
-
-  console.log(sneaker);
 
   //Delete Sneaker
   const handleDelete = async (e) => {
@@ -57,8 +62,7 @@ export default function ProductDetail({ setSneakers, setUpdate }) {
     setDescription("");
   };
 
-  //Add Size
-
+  //Handle Change on Variant (Size&Price) to Sneaker
   const handleSize = (e) => {
     const newVariantData = {
       ...variantData,
@@ -67,6 +71,7 @@ export default function ProductDetail({ setSneakers, setUpdate }) {
     setVariantData(newVariantData);
   };
 
+  //Handle Add Variant to Sneaker
   const handleAdd = async (e) => {
     e.preventDefault();
     const data = { size, price };
@@ -75,6 +80,7 @@ export default function ProductDetail({ setSneakers, setUpdate }) {
     setVariantData(defaultVariant);
   };
 
+  //Handle reflecting Price based on Size Change
   const changePrice = (e) => {
     setPriceIdx(e.target.id);
   };

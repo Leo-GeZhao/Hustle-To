@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
+
+//User Service
 import * as userService from "../../utilities/services/users";
 
-import "./NavBar.css";
-
 export default function NavBar({ user, setUser, cart }) {
-  function handleLogOut() {
+  //User Logout
+  const handleLogOut = async () => {
     userService.logout();
     setUser(null);
-  }
+  };
 
   return (
     <nav className="navbar navbar-expand-lg">

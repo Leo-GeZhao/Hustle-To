@@ -1,11 +1,13 @@
-import {sendRequest} from '../request'
-const BASE_URL = '/api/users';
+import axios from "axios";
 
-export async function signUp(userData){
-    return sendRequest(BASE_URL,"POST",userData,"Invalid Sign Up")
-}
+const BASE_URL = "/api/users";
 
-export async function login(credentials) {
-    return sendRequest(`${BASE_URL}/login`, "POST", credentials, "Invalid Credentials")
-  }
+//User SignUp
+export const signUp = async (data) => {
+  return await axios.post(BASE_URL, data);
+};
 
+//User Login
+export const login = async (credentials) => {
+  return await axios.post(`${BASE_URL}/login`, credentials);
+};

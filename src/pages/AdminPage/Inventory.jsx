@@ -1,7 +1,8 @@
+//Components
 import Product from "../../components/Admin/Product";
 
+//This is Admin Side Sneaker List
 export default function Inventory({ user, sneakers, setUpdate }) {
-  console.log(sneakers);
   return (
     <div>
       <h2>Hello, {user.name}</h2>

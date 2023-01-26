@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { signUp } from "../../../utilities/services/users";
 import { useNavigate } from "react-router-dom";
 
-import "./SignUpForm.css";
+//User Service
+import { signUp } from "../../../utilities/services/users";
 
+//Default State for User SignUp
 const defaultState = {
   name: "",
   email: "",
@@ -13,19 +14,28 @@ const defaultState = {
 };
 
 export default function SignUpForm({ setUser, setUpdate }) {
-  const [formData, setFormData] = useState(defaultState);
-
-  const { name, email, password, confirm, error } = formData;
-
+  //Navigate to other Pages
   const navigate = useNavigate();
 
+  const [formData, setFormData] = useState(defaultState);
+  const { name, email, password, confirm, error } = formData;
+
+  //Handle Change on SignUp Form
+  const handleChange = (e) => {
+    const newFormData = {
+      ...formData,
+      [e.target.name]: e.target.value,
+      error: "",
+    };
+    setFormData(newFormData);
+  };
+
+  //Handle SignUp User
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const { name, password, email } = formData;
       const data = { name, password, email };
-
       const user = await signUp(data);
       setUpdate(true);
       setUser(user);
@@ -38,15 +48,7 @@ export default function SignUpForm({ setUser, setUpdate }) {
     }
   };
 
-  function handleChange(evt) {
-    const newFormData = {
-      ...formData,
-      [evt.target.name]: evt.target.value,
-      error: "",
-    };
-    setFormData(newFormData);
-  }
-
+  //Validations for SignUp Form
   const disabled =
     password !== confirm || !name || !email || !password || !confirm;
 

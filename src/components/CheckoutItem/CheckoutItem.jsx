@@ -1,26 +1,31 @@
-import React, { useState } from "react";
-import "./checkoutItem.css";
+import React from "react";
+
+//Cart API
 import * as cartAPI from "../../utilities/api/cart";
 
+//Cart Service
+import * as cartService from "../../utilities/services/cart";
+
+import "./checkoutItem.css";
+
 const CheckoutItem = ({ item, user, setUpdate, idx }) => {
+  //Handle Add Quantity to Cart Item
   const minusQty = async () => {
-    if (item.quantity <= 2) {
-      document.getElementById(idx).disabled = true;
-      console.log(document.getElementById(idx + 1));
-    }
-    // console.log(id);
+    cartService.changeQty(item, idx, "-");
     const data = { user: user._id, id: item._id, quantity: item.quantity - 1 };
     await cartAPI.changeQty(data);
     setUpdate(true);
   };
 
+  //Handle Minus Quantity to Cart Item
   const addQty = async () => {
-    document.getElementById(idx).disabled = false;
+    cartService.changeQty(item, idx, "+");
     const data = { user: user._id, id: item._id, quantity: item.quantity + 1 };
     await cartAPI.changeQty(data);
     setUpdate(true);
   };
 
+  //Handle Delete Cart Item
   const handleDelete = async () => {
     const data = { id: item._id, user: user._id };
     await cartAPI.deleteItem(data);

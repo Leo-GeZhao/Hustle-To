@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
+
+//Checkout API
 import * as checkoutAPI from "../../../utilities/api/checkout";
 
 const OrderHistory = ({ user }) => {
   const [orders, setOrders] = useState([]);
+
+  //Get Order History
   useEffect(function () {
-    async function getOrders() {
+    const getOrders = async () => {
       const data = { user: user._id };
       const orders = await checkoutAPI.getOrders(data);
       setOrders(orders.data);
-    }
+    };
     getOrders();
   }, []);
 
-  console.log(orders);
   return (
     <div>
       <div>

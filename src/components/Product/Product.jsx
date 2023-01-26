@@ -1,22 +1,27 @@
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import * as inventoryAPI from "../../utilities/api/inventory";
+import { useParams } from "react-router-dom";
+
+//Components
 import Sneaker from "../Front/Sneakers/Sneaker";
 
+//Inventory API
+import * as inventoryAPI from "../../utilities/api/inventory";
+
+//This is for Customer Size Showing Sneaker List based on Brand
 const Product = () => {
+  //Get Brand Name from URL
   const { brand } = useParams();
   const [inventory, setInventory] = useState(null);
 
+  //Get Inventories based on Sneaker Brand
   useEffect(function () {
-    async function getSneakers() {
+    const getSneakers = async () => {
       const inventory = await inventoryAPI.getbrand({ brand: brand });
       setInventory(inventory.data);
-    }
+    };
     getSneakers();
   }, []);
 
-  console.log(brand);
-  console.log(inventory);
   return (
     <>
       {inventory && (

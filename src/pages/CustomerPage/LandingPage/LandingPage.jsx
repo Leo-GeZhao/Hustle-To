@@ -1,30 +1,45 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
+//Components
 import Banner from "../../../components/Front/Banners/Banner";
 import Sneaker from "../../../components/Front/Sneakers/Sneaker";
+
+//Inventory API
 import * as inventoryAPI from "../../../utilities/api/inventory";
+
 import "./LandingPage.css";
 
-export default function LandingPage({ sneakers, banners }) {
+export default function LandingPage({ banners }) {
   const [newArrivals, setNewArrivals] = useState([]);
   const [jordan, setJordan] = useState([]);
   const [yeezy, setYeezy] = useState([]);
   const [allInventory, setAllInventory] = useState([]);
+
+  //Get All Inventory
   useEffect(function () {
-    async function getInventory() {
+    const getInventory = async () => {
+      //Get All New Arrivals
       const newArrivals = await inventoryAPI.getbrand({
         brand: "NEW-ARRIVALS",
       });
       setNewArrivals(newArrivals.data.slice(0, 5));
+
+      //Get All Jordans
       const jordanInventory = await inventoryAPI.getbrand({ brand: "jordan" });
       setJordan(jordanInventory.data.slice(0, 5));
+
+      //Get All Yeezys
       const yeezyInventory = await inventoryAPI.getbrand({ brand: "yeezy" });
       setYeezy(yeezyInventory.data.slice(0, 5));
+
+      //Get All Inventory
       const allInventory = await inventoryAPI.getbrand({ brand: "ALL" });
       setAllInventory(allInventory.data.slice(0, 5));
-    }
+    };
     getInventory();
   }, []);
+
   return (
     <div>
       <div

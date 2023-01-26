@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import * as checkoutAPI from "../../../utilities/api/checkout";
+import React from "react";
 
+//Components
 import CheckoutItem from "../../../components/CheckoutItem/CheckoutItem";
 
-const Cart = ({ user, setUpdate, update, cart }) => {
+//Checkout API
+import * as checkoutAPI from "../../../utilities/api/checkout";
+
+const Cart = ({ user, setUpdate, cart }) => {
+  //Handle Checkout Cart
   const handleCheckout = async () => {
     const data = { cart: cart };
     const checkout = await checkoutAPI.checkout(data);
+
+    //Open Stripe Checout Page
     const url = checkout.data.url;
     window.location = url;
   };

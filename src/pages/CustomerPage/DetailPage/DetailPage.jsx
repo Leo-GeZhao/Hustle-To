@@ -1,48 +1,53 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import * as inventoryAPI from "../../../utilities/api/inventory";
-import * as cartAPI from "../../../utilities/api/cart";
+
+//Components
 import Sneaker from "../../../components/Front/Sneakers/Sneaker";
 
+//APIs
+import * as inventoryAPI from "../../../utilities/api/inventory";
+import * as cartAPI from "../../../utilities/api/cart";
+
 import "./DetailPage.css";
-import { isDisabled } from "@testing-library/user-event/dist/utils";
+
 export default function DetailPage({ user, setUpdate }) {
+  //Get Inventory Name Based on URL
+  const { sneakerName } = useParams();
+
   const [sneaker, setSneaker] = useState("");
   const [related, setRelated] = useState([]);
   const [size, setSize] = useState(null);
-
   const [variant, setVariant] = useState(null);
   const [priceIdx, setPriceIdx] = useState(0);
 
-  const { sneakerName } = useParams();
-
   useEffect(
     function () {
-      async function getSneaker(sneakerName) {
+      const getSneaker = async (sneakerName) => {
+        //Get Single Inventory based on Sneaker Name
         const sneaker = await inventoryAPI.getSneaker(sneakerName);
         setSneaker(sneaker.data);
 
+        //Get Related Inventories based on Brand
         const data = { brand: sneaker.data.brand, name: sneakerName };
         const related = await inventoryAPI.getRelated(data);
         setRelated(related.data);
-      }
+      };
 
       getSneaker(sneakerName);
     },
     [sneakerName]
   );
 
-  //size-price association
+  //Handle Reflecting Price based on Size Change, and Capture Variant
   const changePrice = (e) => {
     setPriceIdx(e.target.id);
     setVariant(sneaker.variant[e.target.id]);
     setSize(e.target.textContent);
   };
 
-  //Add Cart
+  //Handle Add Inventory to Cart
   const handleAddCart = async (e) => {
-    console.log(e);
     const data = {
       user: user._id,
       brand: sneaker.brand,

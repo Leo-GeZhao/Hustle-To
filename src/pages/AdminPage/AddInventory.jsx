@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+//Admin API
 import * as adminAPI from "../../utilities/api/admin";
 
+//Default State for Inventory
 const defaultState = {
   brand: "Adidas",
   name: "",
@@ -10,12 +13,28 @@ const defaultState = {
 };
 
 export default function AddInventory({ sneakers, setSneakers, setUpdate }) {
-  const [formData, setFormData] = useState(defaultState);
-
-  const { brand, name, description } = formData;
-
+  //Navigate to other Pages
   const navigate = useNavigate();
 
+  const [formData, setFormData] = useState(defaultState);
+  const { brand, name, description } = formData;
+
+  //Handle Change on Sneaker State
+  const handleChange = (e) => {
+    const newFormData = {
+      ...formData,
+      [e.target.name]: e.target.value,
+    };
+    setFormData(newFormData);
+  };
+
+  //Handle Change on Sneaker File/Img
+  const handleUpload = (e) => {
+    const file = e.target.files[0];
+    setFormData({ ...formData, image: file });
+  };
+
+  //Handle Add New Sneaker
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData();
@@ -27,19 +46,6 @@ export default function AddInventory({ sneakers, setSneakers, setUpdate }) {
     setUpdate(true);
     navigate("/admin/product");
   };
-
-  function handleChange(evt) {
-    const newFormData = {
-      ...formData,
-      [evt.target.name]: evt.target.value,
-    };
-    setFormData(newFormData);
-  }
-
-  function handleUpload(e) {
-    const file = e.target.files[0];
-    setFormData({ ...formData, image: file });
-  }
 
   return (
     <div className="">

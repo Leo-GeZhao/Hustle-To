@@ -1,10 +1,13 @@
 import axios from "axios";
+
 const BASE_URL = "/api/checkouts";
 
-export function checkout(data) {
-  return axios.post(`${BASE_URL}/create-checkout-session`, data);
-}
+//Stripe Checkout
+export const checkout = async (data) => {
+  return await axios.post(`${BASE_URL}/create-checkout-session`, data);
+};
 
-export function getOrders(data) {
-  return axios.post(`${BASE_URL}/orders`, data);
-}
+//Get Order History
+export const getOrders = async (data) => {
+  return await axios.post(`${BASE_URL}/orders`, data);
+};

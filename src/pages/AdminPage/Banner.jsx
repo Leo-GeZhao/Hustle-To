@@ -1,7 +1,12 @@
 import { useState } from "react";
+
+//Components
 import Banners from "../../components/Banners/Banners";
+
+//Admin API
 import * as adminAPI from "../../utilities/api/admin";
 
+//Default FormData
 const defaultState = {
   name: "",
   image: "",
@@ -11,15 +16,18 @@ export default function Banner({ banners, setBanners, update, setUpdate }) {
   const [formData, setFormData] = useState(defaultState);
   const { name, image } = formData;
 
+  //Handle Name Change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  //Handle FIle/Img Change
   const handleUpload = (e) => {
     const file = e.target.files[0];
     setFormData({ ...formData, image: file });
   };
 
+  //Handle Submit Form
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData();
@@ -63,12 +71,7 @@ export default function Banner({ banners, setBanners, update, setUpdate }) {
         <h2>Banners</h2>
         <hr />
         {banners.map((b) => (
-          <Banners
-            banner={b}
-            setBanners={setBanners}
-            update={update}
-            setUpdate={setUpdate}
-          />
+          <Banners banner={b} setUpdate={setUpdate} />
         ))}
       </div>
     </>

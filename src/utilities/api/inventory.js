@@ -1,22 +1,28 @@
 import axios from "axios";
+
 const BASE_URL = "/api/inventories";
 
-export function getNewArrivals() {
-  return axios.get(`${BASE_URL}/newArrivals`);
-}
+//Get All New Arrivals
+export const getNewArrivals = async () => {
+  return await axios.get(`${BASE_URL}/newArrivals`);
+};
 
-export function getbrand(data) {
-  return axios.post(`${BASE_URL}/brand`, data);
-}
+//Get Inventories Based on Brand
+export const getbrand = async (data) => {
+  return await axios.post(`${BASE_URL}/brand`, data);
+};
 
-export function getAll() {
-  return axios.get(`${BASE_URL}/all`);
-}
+//Get All Inventories
+export const getAll = async () => {
+  return await axios.get(`${BASE_URL}/all`);
+};
 
-export function getSneaker(sneakerName) {
-  return axios.get(`${BASE_URL}/${sneakerName}`);
-}
+//Get Signle Inventory Detail
+export const getSneaker = async (sneakerName) => {
+  return await axios.get(`${BASE_URL}/${sneakerName}`);
+};
 
-export function getRelated(data) {
-  return axios.post(`${BASE_URL}/related`, data);
-}
+//Get All Related Inventory in the Same Brand
+export const getRelated = async (data) => {
+  return await axios.post(`${BASE_URL}/related`, data);
+};
