@@ -45,7 +45,7 @@
 
 - Customer can create accounts
 
-<img src = "public/ReadMe/Login.png">
+<img src = "public/ReadMe/login.png">
 
 - Registered customer can login to access more futures
 
