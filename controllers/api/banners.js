@@ -1,30 +1,30 @@
 const Banner = require("../../models/banner");
-const ObjectId = require("mongodb").ObjectId;
 
-async function create(req, res) {
+//Create a Banner
+async function create(req, res, next) {
   try {
-    const newBanner = new Banner(req.body);
-    newBanner.image = req.file.location;
-    await newBanner.save();
-    res.json(newBanner);
+    const newBanner = await Banner.createBanner(req);
+    res.status(200).json(newBanner);
   } catch (err) {
     res.status(400).json(err);
   }
 }
 
-async function index(req, res) {
+//Get All Banners
+async function index(req, res, next) {
   try {
-    const banners = await Banner.find({});
-    res.json(banners);
+    const banners = await Banner.getBanners(req);
+    res.status(200).json(banners);
   } catch (err) {
     res.status(400).json(err);
   }
 }
 
+//Delete a Banner
 async function deleteBanner(req, res) {
   try {
-    await Banner.deleteOne({ _id: ObjectId(req.params.id) });
-    res.json();
+    await Banner.deleteBanner(req);
+    res.status(200).json();
   } catch (err) {
     res.status(400).json(err);
   }

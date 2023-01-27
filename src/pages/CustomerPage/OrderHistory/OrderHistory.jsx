@@ -16,6 +16,7 @@ const OrderHistory = ({ user }) => {
     getOrders();
   }, []);
 
+  console.log(orders);
   return (
     <div>
       <div>
@@ -28,6 +29,7 @@ const OrderHistory = ({ user }) => {
               <th scope="col"></th>
               <th scope="col">Brand</th>
               <th scope="col">Name</th>
+              <th scope="col">Quantity</th>
               <th scope="col">Size</th>
               <th scope="col">Price</th>
             </tr>
@@ -36,7 +38,7 @@ const OrderHistory = ({ user }) => {
             orders.map((o) => (
               <>
                 <div className=" mt-4 ms-3 " style={{ width: "100%" }}>
-                  Order Placed: {o.updatedAt.substring(0, 10)}
+                  <div>Order Placed: {o.updatedAt.substring(0, 10)}</div>
                 </div>
                 {o.orderDetail.map((d) => (
                   <>
@@ -50,6 +52,9 @@ const OrderHistory = ({ user }) => {
                       </td>
                       <td className="item-list">
                         <div>{d.name}</div>
+                      </td>
+                      <td className="item-list">
+                        <div>{d.quantity}</div>
                       </td>
                       <td className="item-list">
                         <div>{d.size}</div>

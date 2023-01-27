@@ -6,7 +6,7 @@ const bannerCtrl = require("../../controllers/api/banners");
 //Amazon S3 Image
 const multer_S3 = require("../../config/multer_S3");
 
-//Add Banner
+//Create Banner
 router.post("/", multer_S3.upload.single("image"), bannerCtrl.create);
 
 //Get All Banners

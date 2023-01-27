@@ -1,72 +1,39 @@
 const Cart = require("../../models/carts");
 
+//Update a Cart if exist & Create a Cart if not exist
 async function add(req, res, next) {
   try {
-    const customerCart = await Cart.findOne({
-      user: req.body.user,
-      isPaid: false,
-    });
-    if (customerCart) {
-      const updatedCart = await Cart.findOneAndUpdate(
-        { user: req.body.user, isPaid: false },
-        { $push: { orderDetail: req.body } }
-      );
-      await updatedCart.save();
-      res.status(200).json(updatedCart);
-    } else {
-      const cart = await new Cart({ user: req.body.user });
-      cart.orderDetail = [
-        {
-          brand: req.body.brand,
-          name: req.body.name,
-          size: req.body.size,
-          price: req.body.price,
-          image: req.body.image,
-        },
-      ];
-
-      await cart.save();
-      res.status(200).json(cart);
-    }
+    const cart = await Cart.addCart(req);
+    res.status(200).json(cart);
   } catch (err) {
     res.status(400).json(err);
   }
 }
 
+//Get a Cart
 async function get(req, res, next) {
   try {
-    const cart = await Cart.findOne({ user: req.body.user, isPaid: false });
+    const cart = await Cart.getCart(req);
     res.status(200).json(cart);
   } catch (err) {
     res.status(400).json(err);
   }
 }
 
+//Delete a Item from cart
 async function deleteOne(req, res, next) {
   try {
-    const cart = await Cart.findOneAndUpdate(
-      { user: req.body.user, isPaid: false },
-      { $pull: { orderDetail: { _id: req.body.id } } },
-      { new: true }
-    );
+    const cart = await Cart.deleteItem(req);
     res.status(200).json(cart);
   } catch (err) {
     res.status(400).json(err);
   }
 }
 
+//Change Qty of a Item from cart
 async function changeQty(req, res, next) {
   try {
-    // const cart = await Cart.findOne({ user: req.body.user });
-    const updatedCart = await Cart.findOneAndUpdate(
-      { user: req.body.user, "orderDetail._id": req.body.id },
-      {
-        $set: {
-          "orderDetail.$.quantity": req.body.quantity,
-        },
-      }
-    );
-
+    await Cart.changeQty(req);
     res.status(200).json();
   } catch (err) {
     res.status(400).json(err);
